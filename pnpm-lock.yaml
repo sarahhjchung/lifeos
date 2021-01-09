@@ -12,6 +12,7 @@ devDependencies:
   html-minifier: 4.0.0
   postcss: 8.2.4
   postcss-cli: 8.3.1_postcss@8.2.4
+  sass: 1.32.2
   typescript: 4.1.3
   uglify-js: 3.12.4
 lockfileVersion: 5.2
@@ -1686,6 +1687,15 @@ packages:
     dev: true
     resolution:
       integrity: sha512-zb/1OuZ6flOlH6tQyMPUrE3x3Ulxjlo9WIVXR4yVYi4H9UXQaeIsPbLn2R3O3vQCnDKkAl2qHiuocKKX4Tz/Sw==
+  /sass/1.32.2:
+    dependencies:
+      chokidar: 3.5.0
+    dev: true
+    engines:
+      node: '>=8.9.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-u1pUuzqwz3SAgvHSWp1k0mRhX82b2DdlVnP6UIetQPZtYbuJUDaPQhZE12jyjB7vYeOScfz9WPsZJB6Rpk7heA==
   /semver/5.7.1:
     dev: true
     hasBin: true
@@ -2060,5 +2070,6 @@ specifiers:
   mithril: ^2.0.4
   postcss: ^8.2.4
   postcss-cli: ^8.3.1
+  sass: ^1.32.2
   typescript: ^4.1.3
   uglify-js: ^3.12.4
