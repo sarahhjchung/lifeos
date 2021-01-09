@@ -1,21 +1,36 @@
 import m from 'mithril'
-import toggleNoise from './noise'
+import { play as playNoise, stop as stopNoise } from './noise'
 
 let page = 'initial'
 let time = 0 // in seconds
-let play = false
+let playing = false
 let noiseColor = 'white'
 let beatsPitch = 200
 let beatsPattern = 'beta'
 
 function start () {
   page = 'playing'
-  toggle()
+  play()
+}
+
+function stop () {
+  page = 'initial'
+  playing = false
+  stopNoise()
+}
+
+function play () {
+  playing = true
+  playNoise()
 }
 
 function toggle () {
-  play = !play
-  toggleNoise()
+  playing = !playing
+  if (playing) {
+    playNoise()
+  } else {
+    stopNoise()
+  }
 }
 
 const pages = {
@@ -29,10 +44,10 @@ const pages = {
     return m('main', [
       m('h1', 'Playing state'),
       m('button', { onclick: () => toggle() },
-        play ? 'Pause' : 'Play'),
+        playing ? 'Pause' : 'Play'),
       m('button', {
-        onclick: () => (page = 'initial'),
-        disabled: play ? 'disabled' : null
+        onclick: () => stop(),
+        disabled: playing ? 'disabled' : null
       }, 'Stop')
     ])
   },
@@ -40,7 +55,7 @@ const pages = {
     return m('main', [
       m('h1', 'Complete state'),
       m('button', 'Snooze'),
-      m('button', { onclick: () => (page = 'initial') }, 'Ok')
+      m('button', { onclick: () => stop() }, 'Ok')
     ])
   }
 }

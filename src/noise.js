@@ -14,14 +14,17 @@ for (let i = 0; i < bufferSize; i++) {
 
 let noise = null
 
-export default function toggle () {
-  if (!noise) {
-    noise = context.createBufferSource()
-    noise.buffer = buffer
-    noise.loop = true
-    noise.connect(context.destination)
-    noise.start()
-  } else {
+export function play () {
+  if (noise) return
+  noise = context.createBufferSource()
+  noise.buffer = buffer
+  noise.loop = true
+  noise.connect(context.destination)
+  noise.start()
+}
+
+export function stop () {
+  if (noise) {
     noise.stop()
     noise = null
   }
