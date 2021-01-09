@@ -4,7 +4,19 @@
   "description": "productivity app",
   "license": "MIT",
   "scripts": {
-    "start": "make start"
+    "clean": "rm -rf dist tmp && mkdir tmp && mkdir -p dist",
+    "html": "cp src/popup.html dist/popup.html",
+    "css": "sass src/style.scss dist/style.css",
+    "js": "esbuild src/popup.js --bundle --sourcemap --outfile=dist/popup.js",
+    "json": "cp src/manifest.json dist/manifest.json",
+    "assets": "cp -r src/assets dist",
+    "watch-html": "chokidar \"src/**/*.js\" -c \"npm run html\"",
+    "watch-css": "chokidar \"src/**/*.scss\" -c \"npm run css\"",
+    "watch-js": "chokidar \"src/*.html\" -c \"npm run js\"",
+    "watch-json": "chokidar \"src/manifest.json\" -c \"npm run json\"",
+    "watch-assets": "chokidar \"src/assets/*\" -c \"npm run assets\"",
+    "prestart": "npm run clean",
+    "start": "npm run watch-html & npm run watch-css & npm run watch-js & npm run watch-json & npm run watch-assets"
   },
   "dependencies": {
     "mithril": "^2.0.4"
