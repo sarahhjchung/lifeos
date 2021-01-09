@@ -15,7 +15,7 @@
     "watch-js": "chokidar \"src/*.html\" -c \"npm run js\"",
     "watch-json": "chokidar \"src/manifest.json\" -c \"npm run json\"",
     "watch-assets": "chokidar \"src/assets/*\" -c \"npm run assets\"",
-    "prestart": "npm run clean",
+    "prestart": "npm run clean && npm run html && npm run css && npm run js && npm run json && npm run assets",
     "start": "npm run watch-html & npm run watch-css & npm run watch-js & npm run watch-json & npm run watch-assets"
   },
   "dependencies": {
