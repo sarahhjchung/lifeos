@@ -21,11 +21,15 @@ css:
 js:
 	esbuild src/popup.js --bundle --sourcemap --define:process.env.NODE_ENV=\"dev\" --loader:.js=jsx --outfile=dist/popup.js
 
+json:
+	cp src/manifest.json dist/manifest.json
+
 assets:
 	cp -r src/assets dist
 
-start: clean js css html assets
+start: clean js css html assets json
 	chokidar "src/**/*.js" -c "make js" \
 	& chokidar "src/**/*.scss" -c "make css" \
 	& chokidar "src/*.html" -c "make html" \
 	& chokidar "src/assets/*" -c "make assets" \
+	& chokidar "src/manifest.json" -c "make json" \
