@@ -30,7 +30,10 @@ const pages = {
       m('h1', 'Playing state'),
       m('button', { onclick: () => toggle() },
         play ? 'Pause' : 'Play'),
-      m('button', { onclick: () => (page = 'initial') }, 'Stop')
+      m('button', {
+        onclick: () => (page = 'initial'),
+        disabled: play ? 'disabled' : null
+      }, 'Stop')
     ])
   },
   complete () {
