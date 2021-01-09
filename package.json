@@ -4,7 +4,11 @@
   "description": "productivity app",
   "license": "MIT",
   "scripts": {
+<<<<<<< HEAD
     "clean": "rm -rf dist tmp && mkdir tmp && mkdir dist",
+=======
+    "clean": "rm -rf dist tmp && mkdir tmp && mkdir dist && mkdir dist\\assets",
+>>>>>>> 3433a1b4a105e6dcbf93cc84ca6dd8dc8e2c2e00
     "html": "cp src/popup.html dist/popup.html",
     "css": "sass src/style.scss dist/style.css",
     "js": "esbuild src/popup.js --bundle --sourcemap --outfile=dist/popup.js",
