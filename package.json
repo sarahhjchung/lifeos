@@ -1,4 +1,24 @@
 {
   "name": "lifeos",
-  "description": "productivity app"
+  "version": "0.0.0",
+  "description": "productivity app",
+  "license": "MIT",
+  "dependencies": {
+    "mithril": "^2.0.4"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^2.1.0",
+    "clean-css-cli": "^4.3.0",
+    "esbuild": "^0.8.31",
+    "eslint": "^7.17.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "html-minifier": "^4.0.0",
+    "postcss": "^8.2.4",
+    "postcss-cli": "^8.3.1",
+    "typescript": "^4.1.3",
+    "uglify-js": "^3.12.4"
+  }
 }
