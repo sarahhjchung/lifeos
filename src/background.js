@@ -235,11 +235,15 @@ const actions = {
 chrome.runtime.onInstalled.addListener(() => {
   // clear old alarm if existent (for debugging)
   chrome.alarms.clear()
+
+  actions.clearHeartbeat()
+
   chrome.runtime.onConnect.addListener(p => {
     port = p
 
     if (state.view === 'work' && !state.paused) {
       chrome.alarms.get(alarm => {
+        if (!alarm) return
         const ticks = Math.floor((alarm.scheduledTime - Date.now()) / 1000)
         state.timer = ticks
         cb()
@@ -249,7 +253,9 @@ chrome.runtime.onInstalled.addListener(() => {
     }
 
     function cb () {
-      actions.queueHeartbeat()
+      if (state.view === 'work' && !state.paused) {
+        actions.queueHeartbeat()
+      }
 
       port.postMessage(['state', state])
 
@@ -267,6 +273,9 @@ chrome.runtime.onInstalled.addListener(() => {
   })
 
   chrome.alarms.onAlarm.addListener(alarm => {
-    port.postMessage(['done'])
+    state.view = 'done'
+    actions.stopAudio()
+    actions.clearHeartbeat()
+    port.postMessage(['finish'])
   })
 })

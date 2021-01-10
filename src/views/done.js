@@ -12,14 +12,14 @@ export default (state, actions) =>
     m('h1', { class: 'title' }, 'Time\'s up!'),
     m('h3', { class: 'message' }, chooseMsg(messages)),
     m('div', { class: 'circles' }, [
-      m('label', { for: 'timer-hours', class: 'circle -hours' }, [
-        m('h2', { id: 'timer-hours' }, '00')
+      m('div', { class: 'circle -hours' }, [
+        m('h2', { class: 'circle-number' }, '00')
       ]),
-      m('label', { for: 'timer-minutes', class: 'circle -minutes' }, [
-        m('h2', { id: 'timer-minutes' }, '00')
+      m('div', { class: 'circle -mins' }, [
+        m('h2', { class: 'circle-number' }, '00')
       ]),
-      m('label', { for: 'timer-seconds', class: 'circle -seconds' }, [
-        m('h2', { id: 'timer-seconds' }, '00')
+      m('div', { class: 'circle -secs' }, [
+        m('h2', { class: 'circle-number' }, '00')
       ])
     ]),
     m('div', { class: 'done-buttons' }, [

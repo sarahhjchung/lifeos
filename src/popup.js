@@ -51,6 +51,11 @@ const actions = {
     port.postMessage(['stop'])
   },
 
+  finish () {
+    state.view = 'done'
+    state.timer = 0
+  },
+
   changeVolume (event) {
     state.volume = event.target.value
     port.postMessage(['changeVolume', state.volume])
@@ -109,5 +114,7 @@ port.onMessage.addListener(message => {
     })
   } else if (msgtype === 'pulse') {
     actions.pulse(msgdata[0])
+  } else if (msgtype === 'finish') {
+    actions.finish()
   }
 })
