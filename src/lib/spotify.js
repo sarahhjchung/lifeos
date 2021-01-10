@@ -1,8 +1,8 @@
 import m from 'mithril'
-import clientId from './client.json'
 
 const chrome = window.chrome // eslint prefix
 const endpoint = 'https://accounts.spotify.com/authorize'
+const clientId = '299a4acc53634bc286572df9b8e8d9e3'
 const scopes = [
   'user-read-currently-playing',
   'user-read-playback-state'
