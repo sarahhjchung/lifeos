@@ -69,6 +69,21 @@ const actions = {
     }
   },
 
+  changeVolume (volume) {
+    state.volume = volume
+    Noise.setVolume(volume)
+    Beats.setVolume(volume)
+    actions.stopAudio()
+    actions.playAudio()
+  },
+
+  changePitch (pitch) {
+    state.beatsPitch = pitch
+    Beats.setHz(pitch)
+    actions.stopAudio()
+    actions.playAudio()
+  },
+
   changeMode (mode) {
     actions.stopAudio()
     state.mode = mode

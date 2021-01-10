@@ -33,13 +33,13 @@ const splitter = context.createChannelSplitter(2)
 const merger = context.createChannelMerger(2)
 const left = context.createOscillator()
 const leftGainNode = context.createGain()
-left.type = 'square'
+left.type = 'sine'
 
 const splitter2 = context.createChannelSplitter(2)
 const merger2 = context.createChannelMerger(2)
 const right = context.createOscillator()
 const rightGainNode = context.createGain()
-right.type = 'square'
+right.type = 'sine'
 
 left.start()
 right.start()

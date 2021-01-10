@@ -57,6 +57,15 @@ const actions = {
     state.ticks = 0
     port.postMessage(['stop'])
   },
+  changeVolume (event) {
+    state.volume = event.target.value
+    port.postMessage(['changeVolume', state.volume])
+  },
+  changePitch (event) {
+    state.beatsPitch = event.target.value
+    console.log(state.beatsPitch)
+    port.postMessage(['changePitch', state.beatsPitch])
+  },
   selectMode (event) {
     state.mode = event.target.value
     port.postMessage(['changeMode', state.mode])

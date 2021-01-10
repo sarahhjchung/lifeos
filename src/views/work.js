@@ -53,14 +53,21 @@ export default (state, actions) => {
           m('div', { class: 'pitch' }, [
             m('span', { class: 'material-icons-round' }, 'music_note'),
             m('span', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
-            m('input', { class: 'pitch-slider', type: 'range', min: 5, max: 1000 })
+            m('input', {
+              class: 'pitch-slider',
+              type: 'range',
+              min: 5,
+              max: 1000,
+              value: state.beatsPitch,
+              onchange: actions.changePitch
+            })
           ]),
           m('select', { class: 'beats-mode', onchange: actions.selectBeats }, [
-            m('option', { value: 'delta', selected: state.noiseColor === 'delta' }, 'Delta'),
-            m('option', { value: 'theta', selected: state.noiseColor === 'theta' }, 'Theta'),
-            m('option', { value: 'alpha', selected: state.noiseColor === 'alpha' }, 'Alpha'),
-            m('option', { value: 'beta', selected: state.noiseColor === 'beta' }, 'Beta'),
-            m('option', { value: 'gamma', selected: state.noiseColor === 'gamma' }, 'Gamma')
+            m('option', { value: 'delta', selected: state.beatsPattern === 'delta' }, 'Delta'),
+            m('option', { value: 'theta', selected: state.beatsPattern === 'theta' }, 'Theta'),
+            m('option', { value: 'alpha', selected: state.beatsPattern === 'alpha' }, 'Alpha'),
+            m('option', { value: 'beta', selected: state.beatsPattern === 'beta' }, 'Beta'),
+            m('option', { value: 'gamma', selected: state.beatsPattern === 'gamma' }, 'Gamma')
           ])
         ])
       : null,
