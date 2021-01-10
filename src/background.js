@@ -18,25 +18,24 @@ const state = {
 const actions = {
   start (ticks) {
     state.view = 'work'
-    chrome.alarms.create({ when: Date.now() + ticks * 1000 })
+    state.timer = ticks
     actions.play()
   },
 
   play () {
     state.paused = false
     actions.playAudio()
+    chrome.alarms.create({ when: Date.now() + state.timer * 1000 })
   },
 
   pause () {
+    state.paused = true
     actions.stopAudio()
-  },
-
-  toggle () {
-    if (state.paused) {
-      actions.play()
-    } else {
-      actions.pause()
-    }
+    chrome.alarms.get(alarm => {
+      const ticks = Math.floor((alarm.scheduledTime - Date.now()) / 1000)
+      state.timer = ticks
+    })
+    chrome.alarms.clear()
   },
 
   stop () {
@@ -96,9 +95,10 @@ function listen (message) {
 }
 
 chrome.runtime.onInstalled.addListener(() => {
+  // clear old alarm if existent (for debugging)
   chrome.alarms.clear()
   chrome.runtime.onConnect.addListener(port => {
-    if (state.view === 'work') {
+    if (state.view === 'work' && !state.paused) {
       chrome.alarms.get(alarm => {
         const ticks = Math.floor((alarm.scheduledTime - Date.now()) / 1000)
         state.timer = ticks

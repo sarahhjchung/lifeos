@@ -25,7 +25,7 @@ export default (state, actions) => {
       onclick: actions.stop,
       disabled: !state.paused ? 'disabled' : null
     }, m('span', { class: 'material-icons-round' }, 'replay')),
-    m('button', { class: 'sound-buttons pause-play', onclick: actions.toggleAudio },
+    m('button', { class: 'sound-buttons pause-play', onclick: actions.toggle },
       state.paused
         ? m('span', { class: 'material-icons-round' }, 'play_arrow')
         : m('span', { class: 'material-icons-round' }, 'pause')),

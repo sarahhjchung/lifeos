@@ -15,6 +15,7 @@ const actions = {
     port.postMessage(['start', ticks])
     state.view = 'work'
     state.timer = ticks
+    state.paused = false
     actions.queueTick()
   },
   tick () {
@@ -33,6 +34,23 @@ const actions = {
     if (!state.alarm) return
     clearTimeout(actions.tick)
     actions.tick = null
+  },
+  play () {
+    state.paused = false
+    actions.queueTick()
+    port.postMessage(['play'])
+  },
+  pause () {
+    state.paused = true
+    actions.clearTick()
+    port.postMessage(['pause'])
+  },
+  toggle () {
+    if (state.paused) {
+      actions.play()
+    } else {
+      actions.pause()
+    }
   }
 }
 
