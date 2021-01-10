@@ -47,11 +47,19 @@ export default (state, actions) =>
     m('div', { class: 'mode-wrapper' },
       m('select', { class: 'mode', onchange: actions.selectMode }, [
         m('option', { value: 'none' }, 'No sound'),
+        m('option', { value: 'mood' }, 'Mood'),
         m('option', { value: 'noise' }, 'Noise'),
         m('option', { value: 'beats' }, 'Binaural beats'),
         m('option', { value: 'spotify' }, 'Spotify')
       ])
     ),
+    state.mode === 'mood'
+      ? m('select', { class: 'noise-mode', onchange: actions.selectNoise }, [
+          m('option', { class: 'noise-type', value: 'rain' }, 'Rain'),
+          m('option', { class: 'noise-type', value: 'pink' }, 'Pink'),
+          m('option', { class: 'noise-type', value: 'white' }, 'White')
+        ])
+      : null,
     state.mode === 'noise'
       ? m('select', { class: 'noise-mode', onchange: actions.selectNoise }, [
           m('option', { class: 'noise-type', value: 'brown' }, 'Brown'),
