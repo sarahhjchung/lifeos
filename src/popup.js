@@ -14,7 +14,7 @@ const state = {
   timer: 0, // in seconds
   timeout: null,
   paused: true,
-  volume: 30,
+  volume: 50,
   noiseColor: 'brown',
   beatsPitch: 200,
   beatsPattern: 'alpha',
