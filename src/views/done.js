@@ -8,7 +8,7 @@ function chooseMsg (msg) {
 
 // Done view (previously "complete state")
 export default (state, actions) =>
-  m('main', [
+  m('main', { class: 'view -done' }, [
     m('h1', { class: 'title' }, 'Time\'s up!'),
     m('h3', { class: 'message' }, chooseMsg(messages)),
     m('div', { class: 'circles' }, [

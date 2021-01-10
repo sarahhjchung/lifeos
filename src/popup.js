@@ -22,6 +22,7 @@ const actions = {
   pulse (song) {
     if (--state.timer < 0) {
       state.timer = 0
+      actions.finish()
     }
     state.song = song
     m.redraw()
