@@ -30,15 +30,14 @@ export default function openSpotify () {
     const start = res.lastIndexOf(startkey) + startkey.length
     const end = res.lastIndexOf(endkey)
     const token = res.slice(start, end)
-    alert(token)
+    window.alert(token)
     m.request({
-      method: 'GET',
-      url: 'https://api.spotify.com/v1/me/player',
-      headers: {
-        Authorization: 'Bearer ' + token
-      }
-    }).then(result => {
-      alert(JSON.stringify(result))
+      url: 'https://api.spotify.com/v1/me',
+      headers: { Authorization: 'Bearer ' + token }
+    }).then(res => {
+      window.alert(JSON.stringify(res))
+    }).catch(err => {
+      window.alert(JSON.stringify(err))
     })
   })
 }
