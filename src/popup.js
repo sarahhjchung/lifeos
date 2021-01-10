@@ -148,6 +148,13 @@ const actions = {
     actions.play()
   },
 
+  changeHz (event) {
+    state.beatsPitch = event.target.value
+    Beats.setHz(event.target.value)
+    actions.stopAudio()
+    actions.playAudio()
+  },
+
   async openSpotify () {
     state.token = await Spotify.auth()
     m.redraw() // force redraw
