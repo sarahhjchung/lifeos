@@ -35,17 +35,17 @@ export default (state, actions) => {
     ]),
     m('div', { class: 'mode-wrapper' },
       m('select', { class: 'mode', onchange: actions.selectMode }, [
-        m('option', { value: 'none' }, 'No sound'),
-        m('option', { value: 'noise' }, 'Noise'),
-        m('option', { value: 'beats' }, 'Binaural beats'),
-        m('option', { value: 'spotify' }, 'Spotify')
+        m('option', { value: 'none', selected: state.mode === 'none' }, 'No sound'),
+        m('option', { value: 'noise', selected: state.mode === 'noise' }, 'Noise'),
+        m('option', { value: 'beats', selected: state.mode === 'beats' }, 'Binaural beats'),
+        m('option', { value: 'spotify', selected: state.mode === 'spotify' }, 'Spotify')
       ])
     ),
     state.mode === 'noise'
       ? m('select', { class: 'noise-mode', onchange: actions.selectNoise }, [
-          m('option', { class: 'noise-type', value: 'brown' }, 'Brown'),
-          m('option', { class: 'noise-type', value: 'pink' }, 'Pink'),
-          m('option', { class: 'noise-type', value: 'white' }, 'White')
+          m('option', { class: 'noise-type', value: 'brown', selected: state.noiseColor === 'brown' }, 'Brown'),
+          m('option', { class: 'noise-type', value: 'pink', selected: state.noiseColor === 'pink' }, 'Pink'),
+          m('option', { class: 'noise-type', value: 'white', selected: state.noiseColor === 'white' }, 'White')
         ])
       : null,
     state.mode === 'beats'
@@ -56,11 +56,11 @@ export default (state, actions) => {
             m('input', { class: 'pitch-slider', type: 'range', min: 5, max: 1000 })
           ]),
           m('select', { class: 'beats-mode', onchange: actions.selectBeats }, [
-            m('option', { value: 'delta' }, 'Delta'),
-            m('option', { value: 'theta' }, 'Theta'),
-            m('option', { value: 'alpha' }, 'Alpha'),
-            m('option', { value: 'beta' }, 'Beta'),
-            m('option', { value: 'gamma' }, 'Gamma')
+            m('option', { value: 'delta', selected: state.noiseColor === 'delta' }, 'Delta'),
+            m('option', { value: 'theta', selected: state.noiseColor === 'theta' }, 'Theta'),
+            m('option', { value: 'alpha', selected: state.noiseColor === 'alpha' }, 'Alpha'),
+            m('option', { value: 'beta', selected: state.noiseColor === 'beta' }, 'Beta'),
+            m('option', { value: 'gamma', selected: state.noiseColor === 'gamma' }, 'Gamma')
           ])
         ])
       : null,
