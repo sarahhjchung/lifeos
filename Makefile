@@ -3,6 +3,7 @@
 MAKEFLAGS += --no-print-directory
 
 .EXPORT_ALL_VARIABLES:
+.PHONY: clean html css js json assets start
 
 PATH := $(PWD)/node_modules/.bin:$(PATH)
 SHELL := /bin/bash
