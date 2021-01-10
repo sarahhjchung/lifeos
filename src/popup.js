@@ -14,7 +14,7 @@ const state = {
   mode: 'none',
   timer: 1500, // in seconds
   timeout: null,
-  paused: false,
+  paused: true,
   volume: 50,
   moodType: 'rain',
   noiseColor: 'brown',
@@ -147,7 +147,11 @@ const actions = {
   },
 
   async selectMode (event) {
-    actions.stopAudio()
+    if (state.mode !== 'beats') {
+      actions.stopAudio()
+    } else if (!state.paused) {
+      actions.stopAudio()
+    }
     state.mode = event.target.value
     actions.playAudio()
   },
