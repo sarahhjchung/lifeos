@@ -13,9 +13,9 @@ splitter.connect(merger, 0, 1)
 // right channel
 const splitter2 = context.createChannelSplitter(2)
 const merger2 = context.createChannelMerger(2)
-const right = context.createOscillator();
-right.type = 'square';
-right.frequency.setValueAtTime(400, context.currentTime)
+const right = context.createOscillator()
+right.type = 'square'
+right.frequency.setValueAtTime(430, context.currentTime)
 right.connect(splitter2)
 right.connect(merger2, 0, 0)
 
