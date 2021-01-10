@@ -1,0 +1,29 @@
+$blue-1: #d6e8ee;
+$blue-2: #97cadb;
+$blue-3: #018abe;
+$blue-4: #02457a;
+$blue-5: #001b48;
+$charcoal: #323232;
+
+body {
+  font-family: "Work Sans", sans-serif;
+}
+
+.title {
+  font-family: "Quicksand";
+  color: $charcoal;
+  text-align: center;
+}
+
+.message {
+  font-family: "Work Sans";
+  color: $blue-3;
+  text-align: center;
+}
+
+.button {
+  background-color: $blue-3;
+  font-family: "Work Sans";
+  color: white;
+  border-radius: 24px;
+}

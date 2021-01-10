@@ -1,18 +1,2 @@
-.title {
-    font-family: 'Quicksand';
-    color: #323232;
-    text-align: center;
-}
-
-.message {
-    font-family: 'Work Sans';
-    color: #4EAED2;
-    text-align: center;
-}
-
-.button {
-    background-color: #018ABE;
-    font-family: 'Work Sans';
-    color: white; 
-    border-radius: 24px;
-}
+@import 'styles/reset';
+@import 'styles/app';
