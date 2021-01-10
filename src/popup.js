@@ -2,6 +2,7 @@ import m from 'mithril'
 import * as Noise from './lib/noise'
 import * as Spotify from './lib/spotify'
 import * as Beats from './lib/beats'
+import * as Mood from './lib/mood'
 import init from './views/init'
 import work from './views/work'
 import done from './views/done'
@@ -15,6 +16,7 @@ const state = {
   timeout: null,
   paused: true,
   volume: 50,
+  moodType: 'rain',
   noiseColor: 'brown',
   beatsPitch: 200,
   beatsPattern: 'alpha',
@@ -97,6 +99,8 @@ const actions = {
       Beats.playBeats()
     } else if (state.mode === 'spotify' && state.token) {
       actions.playSpotify()
+    } else if (state.mode === 'mood') {
+      Mood.playRain()
     }
   },
 
@@ -131,6 +135,12 @@ const actions = {
   },
 
   async selectMode (event) {
+    actions.stopAudio()
+    state.mode = event.target.value
+    actions.playAudio()
+  },
+
+  selectMood (event) {
     actions.stopAudio()
     state.mode = event.target.value
     actions.playAudio()

@@ -54,7 +54,7 @@ export default (state, actions) =>
       ])
     ),
     state.mode === 'mood'
-      ? m('select', { class: 'noise-mode', onchange: actions.selectNoise }, [
+      ? m('select', { class: 'noise-mode', onchange: actions.selectMood }, [
           m('option', { class: 'noise-type', value: 'rain' }, 'Rain'),
           m('option', { class: 'noise-type', value: 'pink' }, 'Pink'),
           m('option', { class: 'noise-type', value: 'white' }, 'White')
