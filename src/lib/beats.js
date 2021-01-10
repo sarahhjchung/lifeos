@@ -1,29 +1,33 @@
 // create web audio api context
 const context = new window.AudioContext()
 
+// left channel
 const splitter = context.createChannelSplitter(2)
 const merger = context.createChannelMerger(2)
+const left = context.createOscillator()
+left.type = 'square'
+left.frequency.setValueAtTime(440, context.currentTime)
+left.connect(splitter)
+splitter.connect(merger, 0, 1)
 
+// right channel
+const splitter2 = context.createChannelSplitter(2)
+const merger2 = context.createChannelMerger(2)
+const right = context.createOscillator()
+right.type = 'square'
+right.frequency.setValueAtTime(430, context.currentTime)
+right.connect(splitter2)
+right.connect(merger2, 0, 0)
 
-const oscillator = context.createOscillator()
-oscillator.type = 'square'
-oscillator.frequency.setValueAtTime(440, context.currentTime)
+left.start()
+right.start()
 
-oscillator.connect(splitter)
-splitter.connect(merger, 0, 0)
-
-const oscillator2 = context.createOscillator();
-oscillator2.type = 'square';
-oscillator2.frequency.setValueAtTime(430, context.currentTime)
-
-oscillator2.connect(splitter)
-oscillator2.connect(merger, 0, 1)
-
-
-export default function playBeats () {
-    merger.connect(context.destination)
-    oscillator.start()
-    oscillator2.start()
-
+export function playBeats () {
+  merger.connect(context.destination)
+  merger2.connect(context.destination)
 }
 
+export function stopBeats () {
+  merger.disconnect(context.destination)
+  merger2.disconnect(context.destination)
+}

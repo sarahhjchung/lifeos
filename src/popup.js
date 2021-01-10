@@ -1,6 +1,7 @@
 import m from 'mithril'
 import * as Noise from './lib/noise'
 import * as Spotify from './lib/spotify'
+import * as Beats from './lib/beats'
 import init from './views/init'
 import work from './views/work'
 import done from './views/done'
@@ -12,7 +13,7 @@ const state = {
   mode: 'none',
   timer: 0, // in seconds
   paused: true,
-  noiseColor: 'white',
+  noiseColor: 'brown',
   beatsPitch: 200,
   beatsPattern: 'beta',
   songTitle: 'Song Title',
@@ -42,7 +43,15 @@ const actions = {
   playAudio () {
     state.paused = false
     if (state.mode === 'noise') {
-      Noise.play()
+      if (state.noiseColor === 'white') {
+        Noise.playWhite()
+      } else if (state.noiseColor === 'pink') {
+        Noise.playPink()
+      } else if (state.noiseColor === 'brown') {
+        Noise.playBrown()
+      }
+    } else if (state.mode === 'beats') {
+      Beats.playBeats()
     }
   },
 
@@ -50,6 +59,8 @@ const actions = {
     state.paused = true
     if (state.mode === 'noise') {
       Noise.stop()
+    } else if (state.mode === 'beats') {
+      Beats.stopBeats()
     }
   },
 
@@ -64,10 +75,13 @@ const actions = {
 
   selectMode (event) {
     state.mode = event.target.value
+    actions.playAudio()
   },
 
   selectNoise (event) {
+    actions.stopAudio()
     state.noiseColor = event.target.value
+    actions.play()
   },
 
   async openSpotify () {

@@ -1,4 +1,5 @@
 import m from 'mithril'
+import { fromSeconds as hhmmss } from '../lib/hummus'
 
 // Work view (previously "playing state")
 export default (state, actions) =>
@@ -83,8 +84,8 @@ export default (state, actions) =>
             m('div', { class: 'widget-seek' }, [
               m('input', { class: 'widget-slider', type: 'range' }),
               m('div', { class: 'widget-times' }, [
-                m('div', { class: 'song-position' }, state.songPosition),
-                m('div', { class: 'song-length' }, state.songLength)
+                m('div', { class: 'song-position' }, hhmmss(state.songPosition)),
+                m('div', { class: 'song-length' }, hhmmss(state.songLength))
               ])
             ])
           ])
