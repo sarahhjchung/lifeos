@@ -1,3 +1,4 @@
+import m from 'mithril'
 import clientId from './client.json'
 
 const chrome = window.chrome // eslint prefix
@@ -30,5 +31,14 @@ export default function openSpotify () {
     const end = res.lastIndexOf(endkey)
     const token = res.slice(start, end)
     alert(token)
+    m.request({
+      method: 'GET',
+      url: 'https://api.spotify.com/v1/me/player',
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    }).then(result => {
+      alert(JSON.stringify(result))
+    })
   })
 }
