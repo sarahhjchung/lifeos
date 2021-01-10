@@ -57,6 +57,10 @@ const actions = {
     }
   },
 
+  selectMode (event) {
+    state.mode = event.target.value
+  },
+
   openSpotify () {
     Spotify.open()
   }
