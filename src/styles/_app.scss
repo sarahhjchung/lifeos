@@ -6,24 +6,76 @@ $blue-5: #001b48;
 $charcoal: #323232;
 
 body {
-  font-family: "Work Sans", sans-serif;
+  margin: 20px;
+  width: 320px;
+  font-family: 'Work Sans', sans-serif;
 }
 
 .title {
-  font-family: "Quicksand";
+  font-family: 'Quicksand';
   color: $charcoal;
   text-align: center;
+  letter-spacing: 3px;
+  font-weight: lighter;
+  font-size: 36px;
+  padding-bottom: 0;
 }
 
 .message {
-  font-family: "Work Sans";
+  font-family: 'Work Sans';
   color: $blue-3;
   text-align: center;
+  font-weight: lighter;
+  width: 60%;
+  margin: auto;
+  padding-top: 0;
+}
+
+.circles-dark {
+  height: 50px;
+  width: 50px;
+  background-color: $blue-5;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.circles-medium {
+  height: 50px;
+  width: 50px;
+  background-color: $blue-3;
+  opacity: 0.7;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  right: 10px;
+}
+
+.circles-light {
+  height: 50px;
+  width: 50px;
+  background-color: $blue-2;
+  opacity: 0.7;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  right: 20px;
 }
 
 .button {
   background-color: $blue-3;
-  font-family: "Work Sans";
-  color: white;
+  font-family: 'Work Sans';
+  color: white; 
+  letter-spacing: 1px;
+  font-size: 12px;
   border-radius: 24px;
+  font-weight: bold;
+  border: none;
+  width: 50%;
+  padding: 8px;
+  box-shadow: 0px 7px 10px #97CADB;
+  outline: none;
 }
+
+  .button:hover{
+      opacity: 0.7;
+  }
