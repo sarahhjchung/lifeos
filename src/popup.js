@@ -1,4 +1,21 @@
 import m from 'mithril'
+<<<<<<< HEAD
+import { play as playNoise, stop as stopNoise } from './lib/noise'
+import init from './views/init'
+import work from './views/work'
+import done from './views/done'
+
+const views = { init, work, done }
+
+const state = {
+  view: 'init',
+  mode: 'none',
+  timer: 0, // in seconds
+  playing: false,
+  noiseColor: 'white',
+  beatsPitch: 200,
+  beatsPattern: 'beta'
+=======
 import { play as playNoise, stop as stopNoise } from './noise'
 import openSpotify from './spotify'
 import playBeats from './beats'
@@ -19,30 +36,26 @@ function stop () {
   page = 'initial'
   playing = false
   stopNoise()
+>>>>>>> master
 }
 
-function play () {
-  playing = true
-  playNoise()
-}
-
-function toggle () {
-  playing = !playing
-  if (playing) {
-    playNoise()
-  } else {
-    stopNoise()
-  }
-}
-
-const pages = {
-  initial () {
-    return m('main', [
-      m('h1', { class: 'title' }, 'LifeOS'),
-      m('h3', { class: 'message' }, 'How long would you like to work?'),
-      m('button', { class: 'start button', onclick: () => start() }, 'Start >')
-    ])
+const actions = {
+  start () {
+    state.view = 'work'
+    actions.play()
   },
+
+  play () {
+    state.playing = true
+    playNoise()
+  },
+<<<<<<< HEAD
+
+  stop () {
+    state.view = 'init'
+    state.playing = false
+    stopNoise()
+=======
   playing () {
     return m('main', [
       m('h1', 'Working...'),
@@ -55,22 +68,21 @@ const pages = {
         disabled: playing ? 'disabled' : null
       }, 'Stop')
     ])
+>>>>>>> master
   },
-  complete () {
-    return m('main', [
-      m('h1', 'Complete state'),
-      m('button', 'Snooze'),
-      m('button', { onclick: () => stop() }, 'Ok')
-    ])
-  }
-}
 
-const popup = {
-  view () {
-    if (pages[page]) {
-      return pages[page]()
+  toggle () {
+    state.playing = !state.playing
+    if (state.playing) {
+      playNoise()
+    } else {
+      stopNoise()
     }
   }
 }
 
-m.mount(document.body, popup)
+m.mount(document.body, {
+  view: () => views[state.view]
+    ? views[state.view](state, actions)
+    : 'not found'
+})
