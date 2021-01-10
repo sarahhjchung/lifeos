@@ -60,7 +60,7 @@ export default (state, actions) =>
           m('div', { class: 'pitch' }, [
             m('span', { class: 'material-icons-round music-note' }, 'music_note'),
             m('h3', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
-            m('input', { class: 'pitch-slider', type: 'range', min: 100, max: 500, onchange: actions.changeHz })
+            m('input', { class: 'pitch-slider', type: 'range', min: 50, max: 500, defaultValue: state.beatsPitch, onchange: actions.changeHz })
           ]),
           m('select', { class: 'beats-mode', onchange: actions.selectBeats }, [
             m('option', { value: 'delta' }, 'Delta'),
