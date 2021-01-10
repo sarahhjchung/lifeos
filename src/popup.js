@@ -13,6 +13,7 @@ const state = {
   mode: 'none',
   timer: 0, // in seconds
   paused: true,
+  volume: 30,
   noiseColor: 'brown',
   beatsPitch: 200,
   beatsPattern: 'alpha',

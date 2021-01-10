@@ -1,5 +1,10 @@
 const duration = 5
-const amplitude = 0.125
+let amplitude = 0.1
+
+export function volume (v) {
+  amplitude = v / 100
+}
+
 const context = new window.AudioContext()
 const bufferSize = context.sampleRate * duration
 const buffer = context.createBuffer(1, 22050, context.sampleRate)
