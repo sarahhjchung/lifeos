@@ -5,25 +5,30 @@ const splitter = context.createChannelSplitter(2)
 const merger = context.createChannelMerger(2)
 
 
-const oscillator = context.createOscillator()
-oscillator.type = 'square'
-oscillator.frequency.setValueAtTime(440, context.currentTime)
+const left = context.createOscillator()
+left.type = 'square'
+left.frequency.setValueAtTime(440, context.currentTime)
 
-oscillator.connect(splitter)
-splitter.connect(merger, 0, 0)
+left.connect(splitter)
+splitter.connect(merger, 0, 1)
 
-const oscillator2 = context.createOscillator();
-oscillator2.type = 'square';
-oscillator2.frequency.setValueAtTime(430, context.currentTime)
+const splitter2 = context.createChannelSplitter(2)
+const merger2 = context.createChannelMerger(2)
 
-oscillator2.connect(splitter)
-oscillator2.connect(merger, 0, 1)
+const right = context.createOscillator();
+right.type = 'square';
+right.frequency.setValueAtTime(400, context.currentTime)
+
+right.connect(splitter2)
+right.connect(merger2, 0, 0)
 
 
-export default function playBeats () {
+export function playBeats () {
     merger.connect(context.destination)
-    oscillator.start()
-    oscillator2.start()
-
+    left.start()
+    merger2.connect(context.destination)
+    right.start()
 }
+
+
 

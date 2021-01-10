@@ -1,6 +1,7 @@
 import m from 'mithril'
 import * as Noise from './lib/noise'
 import * as Spotify from './lib/spotify'
+import * as Beats from './lib/beats'
 import init from './views/init'
 import work from './views/work'
 import done from './views/done'
@@ -49,6 +50,8 @@ const actions = {
       } else if (state.noiseColor === 'brown') {
         Noise.playBrown()
       }
+    } else if (state.mode === 'beats') {
+      Beats.playBeats()
     }
   },
 
