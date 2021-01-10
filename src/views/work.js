@@ -4,12 +4,24 @@ import { fromSeconds as hhmmss } from '../lib/hummus'
 // Work view (previously "playing state")
 export default (state, actions) =>
   m('main', [
-    m('h1', 'Working...'),
+    m('h1', { class: 'title' }, 'Working...'),
+    m('div', { class: 'circles' }, [
+      m('label', { for: 'hours', class: 'circle -hours' }, [
+        m('input', { id: 'hours', class: 'circle-input', placeholder: '00' })
+      ]),
+      m('label', { for: 'minutes', class: 'circle -minutes' }, [
+        m('input', { id: 'minutes', class: 'circle-input', placeholder: '00' })
+      ]),
+      m('label', { for: 'seconds', class: 'circle -seconds' }, [
+        m('input', { id: 'seconds', class: 'circle-input', placeholder: '00' })
+      ])
+    ]),
     m('button', {
+      class: 'sound-buttons',
       onclick: actions.stop,
       disabled: !state.paused ? 'disabled' : null
     }, m('span', { class: 'material-icons-round' }, 'replay')),
-    m('button', { onclick: actions.toggleAudio },
+    m('button', { class: 'sound-buttons', onclick: actions.toggleAudio },
       state.paused
         ? m('span', { class: 'material-icons-round' }, 'play_arrow')
         : m('span', { class: 'material-icons-round' }, 'pause')),
@@ -17,17 +29,19 @@ export default (state, actions) =>
       m('span', { class: 'material-icons-round' }, 'volume_up'),
       m('input', { class: 'volume-slider', type: 'range', min: 0, max: 100 })
     ]),
-    m('select', { onchange: actions.selectMode }, [
-      m('option', { value: 'none' }, 'No sound'),
-      m('option', { value: 'noise' }, 'Noise'),
-      m('option', { value: 'beats' }, 'Binaural beats'),
-      m('option', { value: 'spotify' }, 'Your spotify playlist')
-    ]),
+    m('div', { class: 'mode-wrapper' },
+      m('select', { class: 'mode', onchange: actions.selectMode }, [
+        m('option', { value: 'none' }, 'No sound'),
+        m('option', { value: 'noise' }, 'Noise'),
+        m('option', { value: 'beats' }, 'Binaural beats'),
+        m('option', { value: 'spotify' }, 'Your spotify playlist')
+      ])
+    ),
     state.mode === 'noise'
-      ? m('select', { onchange: actions.selectNoise }, [
-          m('option', { value: 'brown' }, 'Brown'),
-          m('option', { value: 'pink' }, 'Pink'),
-          m('option', { value: 'white' }, 'White')
+      ? m('select', { class: 'mode', onchange: actions.selectNoise }, [
+          m('option', { class: 'noise-type', value: 'brown' }, 'Brown'),
+          m('option', { class: 'noise-type', value: 'pink' }, 'Pink'),
+          m('option', { class: 'noise-type', value: 'white' }, 'White')
         ])
       : null,
     state.mode === 'beats'
@@ -38,6 +52,8 @@ export default (state, actions) =>
             m('input', { class: 'pitch-slider', type: 'range', min: 5, max: 1000 })
           ]),
           m('select', { onchange: actions.selectBeats }, [
+            m('option', { value: 'delta' }, 'Delta'),
+            m('option', { value: 'theta' }, 'Theta'),
             m('option', { value: 'alpha' }, 'Alpha'),
             m('option', { value: 'beta' }, 'Beta'),
             m('option', { value: 'gamma' }, 'Gamma')
