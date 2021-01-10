@@ -22,5 +22,13 @@ export default function openSpotify () {
   window.chrome.identity.launchWebAuthFlow({
     url: req,
     interactive: true
-  }, (res) => { if (res) alert(res) })
+  }, (res) => {
+    if (!res) return
+    const startkey = '#access_token='
+    const endkey = '&token_type'
+    const start = res.lastIndexOf(startkey) + startkey.length
+    const end = res.lastIndexOf(endkey)
+    const token = res.slice(start, end)
+    alert(token)
+  })
 }
