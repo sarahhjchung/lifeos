@@ -15,7 +15,7 @@ const state = {
   paused: true,
   noiseColor: 'brown',
   beatsPitch: 200,
-  beatsPattern: 'beta',
+  beatsPattern: 'alpha',
   songTitle: 'Song Title',
   songArtist: 'Artist',
   songAlbum: 'Album',
@@ -85,6 +85,13 @@ const actions = {
   selectNoise (event) {
     actions.stopAudio()
     state.noiseColor = event.target.value
+    actions.play()
+  },
+
+  selectBeats (event) {
+    actions.stopAudio()
+    state.beatsPattern = event.target.value
+    Beats.setPattern(state.beatsPattern)
     actions.play()
   },
 
