@@ -9,11 +9,11 @@ export default (state, actions) =>
       m('label', { for: 'hours', class: 'circle -hours' }, [
         m('input', { id: 'hours', class: 'circle-input', placeholder: '00' })
       ]),
-      m('label', { for: 'minutes', class: 'circle -minutes' }, [
-        m('input', { id: 'minutes', class: 'circle-input', placeholder: '00' })
+      m('label', { for: 'mins', class: 'circle -mins' }, [
+        m('input', { id: 'mins', class: 'circle-input', placeholder: '00', value: '30' })
       ]),
-      m('label', { for: 'seconds', class: 'circle -seconds' }, [
-        m('input', { id: 'seconds', class: 'circle-input', placeholder: '00' })
+      m('label', { for: 'secs', class: 'circle -secs' }, [
+        m('input', { id: 'secs', class: 'circle-input', placeholder: '00' })
       ])
     ]),
     m('div', { class: 'center-button' }, [

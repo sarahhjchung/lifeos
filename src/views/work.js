@@ -1,19 +1,23 @@
 import m from 'mithril'
-import { fromSeconds as hhmmss } from '../lib/hummus'
+import { fromSeconds } from '../lib/hummus'
 
 // Work view (previously "playing state")
-export default (state, actions) =>
-  m('main', [
+export default (state, actions) => {
+  let model = fromSeconds(state.timer)
+  if (model.length === 4) model = '0' + model
+  if (model.length === 5) model = '00:' + model
+  const [hours, mins, secs] = model.split(':')
+  return m('main', [
     m('h1', { class: 'title' }, 'Working...'),
     m('div', { class: 'circles' }, [
       m('label', { for: 'hours', class: 'circle -hours' }, [
-        m('input', { id: 'hours', class: 'circle-input', placeholder: '00' })
+        m('span', { class: 'circle-label' }, hours)
       ]),
-      m('label', { for: 'minutes', class: 'circle -minutes' }, [
-        m('input', { id: 'minutes', class: 'circle-input', placeholder: '00' })
+      m('label', { for: 'mins', class: 'circle -mins' }, [
+        m('span', { class: 'circle-label' }, mins)
       ]),
-      m('label', { for: 'seconds', class: 'circle -seconds' }, [
-        m('input', { id: 'seconds', class: 'circle-input', placeholder: '00' })
+      m('label', { for: 'secs', class: 'circle -secs' }, [
+        m('span', { class: 'circle-label' }, secs)
       ])
     ]),
     m('button', {
@@ -99,3 +103,4 @@ export default (state, actions) =>
           : m('button', { class: 'spotify-log-in', onclick: actions.openSpotify }, 'Log in with Spotify')
       : null
   ])
+}

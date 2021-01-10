@@ -15,6 +15,7 @@ let token = null
 
 function getURL (endpoint, clientId, scopes) {
   const redirectURL = window.chrome.identity.getRedirectURL('callback')
+  alert(redirectURL)
   return endpoint +
     '?client_id=' + clientId +
     '&scope=' + scopes.join('%20') +
