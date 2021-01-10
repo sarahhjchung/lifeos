@@ -27,7 +27,7 @@ export default (state, actions) =>
         : m('span', { class: 'material-icons-round' }, 'pause')),
     m('div', { class: 'volume' }, [
       m('span', { class: 'material-icons-round' }, 'volume_up'),
-      m('input', { class: 'volume-slider', type: 'range', min: 0, max: 100 })
+      m('input', { class: 'volume-slider', type: 'range', min: 0, max: 100, onchange: actions.changeVolume })
     ]),
     m('div', { class: 'mode-wrapper' },
       m('select', { class: 'mode', onchange: actions.selectMode }, [
