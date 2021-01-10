@@ -29,8 +29,8 @@ assets:
 	cp -r src/assets dist
 
 start: clean js css html assets json
-	chokidar "src/**/*.js" -c "$(MAKE) js" \
-	& chokidar "src/**/*.scss" -c "$(MAKE) css" \
-	& chokidar "src/*.html" -c "$(MAKE) html" \
-	& chokidar "src/assets/*" -c "$(MAKE) assets" \
-	& chokidar "src/manifest.json" -c "$(MAKE) json" \
+	chokidar "src/*.js" -c "make js" \
+	& chokidar "src/*.scss" -c "make css" \
+	& chokidar "src/*.html" -c "make html" \
+	& chokidar "src/assets/*" -c "make assets" \
+	& chokidar "src/manifest.json" -c "make json"
