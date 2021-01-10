@@ -78,6 +78,7 @@ const actions = {
   },
 
   async selectMode (event) {
+    actions.stopAudio()
     state.mode = event.target.value
     actions.playAudio()
   },
@@ -85,13 +86,12 @@ const actions = {
   selectNoise (event) {
     actions.stopAudio()
     state.noiseColor = event.target.value
-    actions.play()
+    actions.playAudio()
   },
 
   selectBeats (event) {
-    actions.stopAudio()
     state.beatsPattern = event.target.value
-    Beats.setPattern(state.beatsPattern)
+    Beats.setPattern(event.target.value)
     actions.play()
   },
 
