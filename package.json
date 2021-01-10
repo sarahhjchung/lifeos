@@ -10,7 +10,7 @@
     "js": "esbuild src/popup.js --bundle --sourcemap --outfile=dist/popup.js",
     "json": "cp src/manifest.json dist/manifest.json",
     "assets": "cp -r src/assets dist",
-    "watch-html": "chokidar \"src/*.html\" -c \"npm run html\"",
+    "watch-html": "chokidar \"src/**/*.html\" -c \"npm run html\"",
     "watch-css": "chokidar \"src/**/*.scss\" -c \"npm run css\"",
     "watch-js": "chokidar \"src/**/*.js\" -c \"npm run js\"",
     "watch-json": "chokidar \"src/manifest.json\" -c \"npm run json\"",
