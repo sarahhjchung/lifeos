@@ -4,15 +4,17 @@ $blue-3: #018abe;
 $blue-4: #02457a;
 $blue-5: #001b48;
 $charcoal: #323232;
+$font-display: 'Work Sans', sans-serif;
+$font-content: 'Quicksand', sans-serif;
 
 body {
   margin: 20px;
   width: 320px;
-  font-family: 'Work Sans', sans-serif;
+  font-family: $font-content;
 }
 
 .title {
-  font-family: 'Quicksand';
+  font-family: $font-display;
   color: $charcoal;
   text-align: center;
   letter-spacing: 3px;
@@ -22,7 +24,7 @@ body {
 }
 
 .message {
-  font-family: 'Work Sans';
+  font-family: $font-content;
   color: $blue-3;
   text-align: center;
   font-weight: lighter;
@@ -31,40 +33,52 @@ body {
   padding-top: 0;
 }
 
-.circles-dark {
-  height: 50px;
-  width: 50px;
-  background-color: $blue-5;
-  border-radius: 50%;
-  display: inline-block;
+.circles {
+  display: flex;
 }
 
-.circles-medium {
-  height: 50px;
-  width: 50px;
-  background-color: $blue-3;
-  opacity: 0.7;
+.circle {
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  display: inline-block;
-  position: relative;
-  right: 10px;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.circles-light {
-  height: 50px;
-  width: 50px;
-  background-color: $blue-2;
-  opacity: 0.7;
-  border-radius: 50%;
-  display: inline-block;
-  position: relative;
-  right: 20px;
+.circle.-hours {
+  background: $blue-5;
+  opacity: 1;
+}
+
+.circle.-minutes {
+  background: $blue-3;
+  margin: 0 -16px;
+}
+
+.circle.-seconds {
+  background: $blue-2;
+}
+
+.circle-input {
+  color: white;
+  background: transparent;
+  font-family: $font-display;
+  font-size: 1.25rem;
+  text-align: center;
+  width: 100%;
+  outline: 0;
+}
+
+.circle-input::placeholder {
+  color: rgba(white, 0.75);
 }
 
 .button {
   background-color: $blue-3;
-  font-family: 'Work Sans';
-  color: white; 
+  font-family: $font-content;
+  color: white;
   letter-spacing: 1px;
   font-size: 12px;
   border-radius: 24px;
