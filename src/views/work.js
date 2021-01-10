@@ -65,13 +65,14 @@ export default (state, actions) => {
               onchange: actions.changePitch
             })
           ]),
-          m('select', { class: 'beats-mode', onchange: actions.selectBeats }, [
-            m('option', { value: 'delta', selected: state.beatsPattern === 'delta' }, 'Delta'),
-            m('option', { value: 'theta', selected: state.beatsPattern === 'theta' }, 'Theta'),
-            m('option', { value: 'alpha', selected: state.beatsPattern === 'alpha' }, 'Alpha'),
-            m('option', { value: 'beta', selected: state.beatsPattern === 'beta' }, 'Beta'),
-            m('option', { value: 'gamma', selected: state.beatsPattern === 'gamma' }, 'Gamma')
-          ])
+          m('div', { class: 'pattern' }, [
+            m('select', { class: 'beats-mode', onchange: actions.selectBeats }, [
+              m('option', { value: 'delta' }, 'Delta'),
+              m('option', { value: 'theta' }, 'Theta'),
+              m('option', { value: 'alpha' }, 'Alpha'),
+              m('option', { value: 'beta' }, 'Beta'),
+              m('option', { value: 'gamma' }, 'Gamma')
+            ])])
         ])
       : null,
     state.mode === 'ambience'

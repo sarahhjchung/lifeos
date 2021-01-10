@@ -216,9 +216,9 @@ input::-webkit-inner-spin-button {
   background-color: white;
 }
 
-.replay {
-  margin-left: 30px;
-}
+// .replay {
+//   margin-left: 30px;
+// }
 
 .replay, .pause-play, .volume {
   display: inline-block;
@@ -237,7 +237,7 @@ select {
   margin-left: 20px;
   margin-bottom: 3px;
   padding-bottom: 2px;
-  width: 100px;
+  width: 90px;
 }
 
 .pitch {
@@ -248,13 +248,17 @@ select {
   width: 150px;
 }
 
-.beats-mode {
+.pattern {
   width: 80px;
   padding: 8px;
-  float: right;
   border-radius: 24px;
   border: 2px solid $blue-2;
+  float: right;
+}
+
+.beats-mode {
   outline: none;
+  width: 100%;
 }
 
 .pitch-hz {
@@ -283,7 +287,6 @@ select {
   width: 240px;
   box-shadow: 0px 7px 10px #94e9b1;
   outline: none;
-  margin-left: 20px;
   margin-top: 10px;
 }
 
