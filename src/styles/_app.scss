@@ -157,8 +157,13 @@ input::-webkit-inner-spin-button {
   // padding: 8px;
 }
 
+  .mode:hover, .noise-mode:hover, .beats-mode:hover {
+    cursor: pointer;
+  }
+
 .music-note {
   z-index: -10;
+  float: left;
 }
 
 .sound-buttons, .material-icons-round {
@@ -194,6 +199,7 @@ input::-webkit-inner-spin-button {
   border: 2px solid $blue-2;
   padding: 3px;
   border-radius: 24px;
+  width: 150px;
 }
 
 .beats-mode {
@@ -208,11 +214,14 @@ input::-webkit-inner-spin-button {
 .pitch-hz {
   font-family: 'Work Sans';
   font-weight: bold;
+  float: left;
+  padding-top: 4px;
 }
 
 .pitch-slider {
-  width: 70px;
-  margin-left: 10px;
+  width: 65px;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 
 .spotify-log-in {
