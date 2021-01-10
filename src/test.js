@@ -23,3 +23,22 @@
 // })();
 
 // pinkNoise.connect(context.destination);
+
+//Test brown noise
+// let brownBufferSize = 2048;
+// let brownNoise = (function() {
+//     let lastOut = 0.0;
+//     let brown = context.createScriptProcessor(brownBufferSize, 1, 1);
+//     brown.onaudioprocess = function(e) {
+//         let output = e.outputBuffer.getChannelData(0);
+//         for (let i = 0; i < brownBufferSize; i++) {
+//             let white = Math.random() * 2 - 1;
+//             output[i] = (lastOut + (0.11 * white)) / 1.1;
+//             lastOut = output[i];
+//             output[i] *= 1; // (roughly) compensate for gain
+//         }
+//     }
+//     return brown;
+// })();
+
+//brownNoise.connect(context.destination);
