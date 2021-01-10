@@ -69,21 +69,21 @@ const actions = {
     }
   },
 
-  changeMode (value) {
+  changeMode (mode) {
     actions.stopAudio()
-    state.mode = value
+    state.mode = mode
     actions.playAudio()
   },
 
-  changeNoise (value) {
+  changeNoise (color) {
     actions.stopAudio()
-    state.mode = value
+    state.noiseColor = color
     actions.playAudio()
   },
 
-  changeBeats (value) {
+  changeBeats (pattern) {
     actions.stopAudio()
-    Beats.setPattern(value)
+    Beats.setPattern(pattern)
     actions.playAudio()
   }
 }

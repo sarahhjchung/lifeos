@@ -56,6 +56,18 @@ const actions = {
     state.view = 'idle'
     state.ticks = 0
     port.postMessage(['stop'])
+  },
+  selectMode (event) {
+    state.mode = event.target.value
+    port.postMessage(['changeMode', state.mode])
+  },
+  selectNoise (event) {
+    state.noiseColor = event.target.value
+    port.postMessage(['changeNoise', state.noiseColor])
+  },
+  selectBeats (event) {
+    state.beatsPattern = event.target.value
+    port.postMessage(['changeBeats', state.beatsPattern])
   }
 }
 
