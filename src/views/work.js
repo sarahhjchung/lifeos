@@ -1,19 +1,34 @@
 import m from 'mithril'
 import { fromSeconds as hhmmss } from '../lib/hummus'
 
+// const hr = 'hours'
+// const min = 'minutes'
+// const sec = 'seconds'
+// var x = setInterval(function () {
+
+//   while(hr + min + sec != 0) {
+//      if(sec == 0 && min !=0) {
+//        min = min - 1
+//        sec = 59
+//      }
+//      if()
+// }
+
+// }, 1000);
+
 // Work view (previously "playing state")
 export default (state, actions) =>
   m('main', [
     m('h1', { class: 'title' }, 'Working...'),
     m('div', { class: 'circles' }, [
-      m('label', { for: 'hours', class: 'circle -hours' }, [
-        m('input', { id: 'hours', class: 'circle-input', placeholder: '00' })
+      m('label', { for: 'timer-hours', class: 'circle -hours' }, [
+        m('h2', { id: 'timer-hours' })
       ]),
-      m('label', { for: 'minutes', class: 'circle -minutes' }, [
-        m('input', { id: 'minutes', class: 'circle-input', placeholder: '00' })
+      m('label', { for: 'timer-minutes', class: 'circle -minutes' }, [
+        m('h2', { id: 'timer-minutes' })
       ]),
-      m('label', { for: 'seconds', class: 'circle -seconds' }, [
-        m('input', { id: 'seconds', class: 'circle-input', placeholder: '00' })
+      m('label', { for: 'timer-seconds', class: 'circle -seconds' }, [
+        m('h2', { id: 'timer-seconds' })
       ])
     ]),
     m('button', {
@@ -47,7 +62,7 @@ export default (state, actions) =>
     state.mode === 'beats'
       ? m('div', { class: 'beats-settings' }, [
           m('div', { class: 'pitch' }, [
-            m('span', { class: 'material-icons-round' }, 'music_note'),
+            m('span', { class: 'material-icons-round music-note' }, 'music_note'),
             m('span', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
             m('input', { class: 'pitch-slider', type: 'range', min: 5, max: 1000 })
           ]),

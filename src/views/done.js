@@ -1,6 +1,6 @@
 import m from 'mithril'
 
-const messages = ['Remember to stay hydrated!', 'Take a moment to stand up and stretch.', 'Rest your eyes!', 'Go outside and touch some grass']
+const messages = ['Remember to stay hydrated!', 'Take a moment to stand up and stretch.', 'Rest your eyes!', 'Go outside and touch some grass.', 'Organize your space!']
 
 function chooseMsg (msg) {
   return msg[Math.floor(Math.random() * messages.length)]
