@@ -1,4 +1,4 @@
-export function toTime (secsTotal) {
+export function fromSeconds (secsTotal) {
   const secs = secsTotal % 60
   const minsTotal = (secsTotal - secs) / 60
   const mins = minsTotal % 60
@@ -21,6 +21,6 @@ export function toTime (secsTotal) {
   return time
 }
 
-export function fromTime () {
+export function toSeconds () {
 
 }
