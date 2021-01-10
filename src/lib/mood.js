@@ -5,10 +5,10 @@ export function setVolume (v) {
 }
 
 const rain = new Audio('../assets/music/rain.mp3')
-rain.volume = volume
-
 
 export function playRain () {
+  rain.volume = volume
+  rain.loop = true
   rain.play()
 }
 
