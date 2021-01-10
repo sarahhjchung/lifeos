@@ -4,8 +4,14 @@ import m from 'mithril'
 export default (state, actions) =>
   m('main', [
     m('h1', 'Working...'),
-    m('button', { onclick: () => actions.toggle() },
-      state.paused ? 'Play' : 'Pause'),
+    m('button', {
+      onclick: actions.stop,
+      disabled: !state.paused ? 'disabled' : null
+    }, m('span', { class: 'material-icons-round' }, 'replay')),
+    m('button', { onclick: actions.toggleAudio },
+      state.paused
+        ? m('span', { class: 'material-icons-round' }, 'play')
+        : m('span', { class: 'material-icons-round' }, 'pause')),
     m('select', { onchange: actions.selectMode }, [
       m('option', { value: 'none' }, 'No sound'),
       m('option', { value: 'noise' }, 'Noise'),
@@ -13,10 +19,6 @@ export default (state, actions) =>
       m('option', { value: 'spotify' }, 'Your spotify playlist')
     ]),
     state.mode === 'spotify'
-      ? m('button', { onclick: () => actions.openSpotify() }, 'Log in with Spotify')
-      : null,
-    m('button', {
-      onclick: () => actions.stop(),
-      disabled: !state.paused ? 'disabled' : null
-    }, 'Stop')
+      ? m('button', { onclick: actions.openSpotify }, 'Log in with Spotify')
+      : null
   ])
