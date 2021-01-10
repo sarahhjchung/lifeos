@@ -11,6 +11,19 @@ export default (state, actions) =>
   m('main', [
     m('h1', { class: 'title' }, 'Time\'s up!'),
     m('h3', { class: 'message' }, chooseMsg(messages)),
-    m('button', 'Snooze'),
-    m('button', { onclick: () => actions.stop() }, 'Ok')
+    m('div', { class: 'circles' }, [
+      m('label', { for: 'timer-hours', class: 'circle -hours' }, [
+        m('h2', { id: 'timer-hours' }, '00')
+      ]),
+      m('label', { for: 'timer-minutes', class: 'circle -minutes' }, [
+        m('h2', { id: 'timer-minutes' }, '00')
+      ]),
+      m('label', { for: 'timer-seconds', class: 'circle -seconds' }, [
+        m('h2', { id: 'timer-seconds' }, '00')
+      ])
+    ]),
+    m('div', { class: 'done-buttons' }, [
+      m('button', { class: 'snooze-button' }, 'Snooze'),
+      m('button', { class: 'ok-button', onclick: actions.stop }, 'Ok')
+    ])
   ])
