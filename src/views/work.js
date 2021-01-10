@@ -12,6 +12,10 @@ export default (state, actions) =>
       state.paused
         ? m('span', { class: 'material-icons-round' }, 'play')
         : m('span', { class: 'material-icons-round' }, 'pause')),
+    m('div', { class: 'volume' }, [
+      m('span', { class: 'material-icons-round' }, 'volume_up'),
+      m('input', { type: 'range', min: 0, max: 100 })
+    ]),
     m('select', { onchange: actions.selectMode }, [
       m('option', { value: 'none' }, 'No sound'),
       m('option', { value: 'noise' }, 'Noise'),
