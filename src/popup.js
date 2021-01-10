@@ -72,7 +72,9 @@ const actions = {
 
   changeVolume (event) {
     state.volume = event.target.value
-    Noise.setVolume(event.target.value)
+    if (state.mode === 'noise') {
+      Noise.setVolume(event.target.value)
+    }
     actions.stopAudio()
     actions.playAudio()
   },
