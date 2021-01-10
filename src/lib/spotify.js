@@ -7,6 +7,7 @@ const scopes = [
   'user-read-currently-playing',
   'user-read-playback-state'
 ]
+let token = null
 
 function getURL (endpoint, clientId, scopes) {
   const redirectURL = chrome.identity.getRedirectURL('callback')
@@ -18,7 +19,7 @@ function getURL (endpoint, clientId, scopes) {
     '&show_dialog=true'
 }
 
-export default function openSpotify () {
+export function open () {
   const req = getURL(endpoint, clientId, scopes)
   window.chrome.identity.launchWebAuthFlow({
     url: req,

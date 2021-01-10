@@ -1,5 +1,6 @@
 import m from 'mithril'
 
+// Init view (previously "initial state")
 export default (state, actions) =>
   m('main', [
     m('h1', { class: 'title' }, 'LifeOS'),
