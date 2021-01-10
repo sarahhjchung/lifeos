@@ -1,0 +1,36 @@
+.widget-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.widget-lhs {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.widget-image {
+  width: 3rem;
+  height: 3rem;
+  background: $blue-1;
+}
+
+.widget-data {
+  margin-left: 0.75rem;
+}
+
+.song-title {
+  font-family: $font-content;
+  font-weight: bold;
+}
+
+.widget-slider {
+  width: 100%;
+}
+
+.widget-times {
+  display: flex;
+  justify-content: space-between;
+}
