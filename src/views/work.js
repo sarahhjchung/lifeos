@@ -38,9 +38,11 @@ export default (state, actions) =>
             m('input', { class: 'pitch-slider', type: 'range', min: 5, max: 1000 })
           ]),
           m('select', { onchange: actions.selectBeats }, [
-            m('option', { value: 'brown' }, 'Brown'),
-            m('option', { value: 'pink' }, 'Pink'),
-            m('option', { value: 'white' }, 'White')
+            m('option', { value: 'delta' }, 'Delta'),
+            m('option', { value: 'theta' }, 'Theta'),
+            m('option', { value: 'alpha' }, 'Alpha'),
+            m('option', { value: 'beta' }, 'Beta'),
+            m('option', { value: 'gamma' }, 'Gamma')
           ])
         ])
       : null,
