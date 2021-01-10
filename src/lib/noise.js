@@ -15,7 +15,7 @@ const buffer = context.createBuffer(1, 22050, context.sampleRate)
 // TODO: cache different buffers on demand
 const data = buffer.getChannelData(0)
 for (let i = 0; i < bufferSize; i++) {
-  data[i] = (Math.random() * 2 - 1) * amplitude
+  data[i] = (Math.random() * 2 - 1) * 0.03
 }
 
 let noise = null
@@ -49,7 +49,7 @@ for (let i = 0; i < pinkBufferSize; i++) {
   b5 = -0.8 * b5 - white * 0.02
   b6 = white * 0.11
   pink[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362
-  pink[i] *= amplitude
+  pink[i] *= 0.01
 }
 
 export function playPink () {
