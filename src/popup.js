@@ -12,6 +12,7 @@ const state = {
   view: 'init',
   mode: 'none',
   timer: 0, // in seconds
+  timeout: null,
   paused: true,
   noiseColor: 'brown',
   beatsPitch: 200,
@@ -41,8 +42,37 @@ const actions = {
     actions.stopAudio()
   },
 
+  update () {
+    if (--state.timer < 0) {
+      state.timer = 0
+    }
+
+    // HACK: using songImage to determine if song exists
+    // TODO: song as substate e.g. state.song
+    if (state.songImage && ++state.songProgress > state.songDuration) {
+      state.songProgress = state.songDuration
+    }
+
+    console.log(state.songProgress)
+    m.redraw()
+  },
+
+  queueUpdate () {
+    state.timeout = setTimeout(actions.update, 1000)
+  },
+
+  cancelUpdate () {
+    // TODO: higher precision
+    if (state.timeout) {
+      clearTimeout(state.timeout)
+      state.timeout = null
+    }
+  },
+
   playAudio () {
     state.paused = false
+    actions.queueUpdate()
+
     if (state.mode === 'noise') {
       if (state.noiseColor === 'white') {
         Noise.playWhite()
@@ -54,12 +84,22 @@ const actions = {
     } else if (state.mode === 'beats') {
       Beats.playBeats()
     } else if (state.mode === 'spotify' && state.token) {
-      Spotify.play()
+      actions.playSpotify()
+    }
+  },
+
+  async playSpotify (params) {
+    try {
+      await Spotify.play(params)
+      await actions.updateSong()
+    } catch (err) {
+      console.log(err)
     }
   },
 
   stopAudio () {
     state.paused = true
+    actions.cancelUpdate()
     if (state.mode === 'noise') {
       Noise.stop()
     } else if (state.mode === 'beats') {
@@ -108,20 +148,20 @@ const actions = {
       return
     }
 
-    try {
-      await Spotify.play({ context_uri: item.context.uri })
-    } catch (err) {
-      console.log(err)
-    }
+    await actions.playSpotify({ context_uri: item.context.uri })
+  },
 
+  async updateSong () {
     const song = await Spotify.getSong()
-    state.songTitle = song.item.name
-    state.songAlbum = song.item.album.name
-    state.songArtist = song.item.artists
-      .map(artist => artist.name).join(', ')
-    state.songImage = song.item.album.images[0].url
-    state.songProgress = Math.floor(song.progress_ms / 1000)
-    state.songDuration = Math.floor(song.item.duration_ms / 1000)
+    if (song && song.item) {
+      state.songTitle = song.item.name
+      state.songAlbum = song.item.album.name
+      state.songArtist = song.item.artists
+        .map(artist => artist.name).join(', ')
+      state.songImage = song.item.album.images[0].url
+      state.songProgress = Math.floor(song.progress_ms / 1000)
+      state.songDuration = Math.floor(song.item.duration_ms / 1000)
+    }
   }
 }
 
@@ -130,3 +170,5 @@ m.mount(document.body, {
     ? views[state.view](state, actions)
     : 'not found'
 })
+
+actions.queueUpdate()

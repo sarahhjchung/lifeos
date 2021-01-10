@@ -52,9 +52,10 @@ export function play (params) {
     m.request({
       method: 'PUT',
       url: 'https://api.spotify.com/v1/me/player/play',
-      headers: { Authorization: 'Bearer ' + token }
+      headers: { Authorization: 'Bearer ' + token },
+      body: params
     }).then(res => resolve(res))
-      .catch(err => reject(new Error(err)))
+      .catch(err => reject(new Error(JSON.stringify(err))))
   })
 }
 
@@ -69,7 +70,7 @@ export function pause () {
       url: 'https://api.spotify.com/v1/me/player/pause',
       headers: { Authorization: 'Bearer ' + token }
     }).then(res => resolve(res))
-      .catch(err => reject(JSON.stringify(err)))
+      .catch(err => reject(new Error(JSON.stringify(err))))
   })
 }
 
@@ -83,7 +84,7 @@ export function getSong () {
       url: 'https://api.spotify.com/v1/me/player/currently-playing',
       headers: { Authorization: 'Bearer ' + token }
     }).then(data => resolve(data))
-      .catch(err => reject(JSON.stringify(err)))
+      .catch(err => reject(new Error(JSON.stringify(err))))
   })
 }
 
@@ -97,6 +98,6 @@ export function getRecents () {
       url: 'https://api.spotify.com/v1/me/player/recently-played',
       headers: { Authorization: 'Bearer ' + token }
     }).then(data => resolve(data))
-      .catch(err => reject(JSON.stringify(err)))
+      .catch(err => reject(new Error(JSON.stringify(err))))
   })
 }
