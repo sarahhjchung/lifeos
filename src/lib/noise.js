@@ -1,6 +1,6 @@
 const duration = 5
 const amplitude = 0.1125
-let volume = 0.1
+let volume = 0.5
 
 export function setVolume (v) {
   volume = v / 100
