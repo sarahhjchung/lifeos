@@ -6,8 +6,13 @@ export default (state, actions) =>
     m('h1', 'Working...'),
     m('button', { onclick: () => actions.toggle() },
       state.paused ? 'Play' : 'Pause'),
+    m('select', [
+      m('option', { value: 'none' }, 'No sound'),
+      m('option', { value: 'noise' }, 'Noise'),
+      m('option', { value: 'beats' }, 'Binaural beats'),
+      m('option', { value: 'spotify' }, 'Your spotify playlist')
+    ]),
     m('button', { onclick: () => actions.openSpotify() }, 'Log in with Spotify'),
-    m('button', { }, 'Play Binaural Beats'),
     m('button', {
       onclick: () => actions.stop(),
       disabled: !state.paused ? 'disabled' : null
