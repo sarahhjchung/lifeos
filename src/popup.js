@@ -43,6 +43,10 @@ const actions = {
     state.paused = false
     if (state.mode === 'noise') {
       Noise.play()
+    } else if (state.mode === 'beats') {
+      // Beats.play()
+    } else if (state.mode === 'spotify') {
+      Spotify.play()
     }
   },
 
@@ -50,6 +54,10 @@ const actions = {
     state.paused = true
     if (state.mode === 'noise') {
       Noise.stop()
+    } else if (state.mode === 'beats') {
+      // Beats.stop()
+    } else if (state.mode === 'spotify') {
+      Spotify.pause()
     }
   },
 
@@ -62,7 +70,7 @@ const actions = {
     }
   },
 
-  selectMode (event) {
+  async selectMode (event) {
     state.mode = event.target.value
   },
 
@@ -72,6 +80,9 @@ const actions = {
 
   async openSpotify () {
     state.token = await Spotify.auth()
+    m.redraw() // force redraw
+    const data = await Spotify.getRecents()
+    window.alert(JSON.stringify(data))
   }
 }
 

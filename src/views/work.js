@@ -48,32 +48,32 @@ export default (state, actions) =>
       : null,
     state.mode === 'spotify'
       ? state.token
-          ? m('button', { onclick: actions.openSpotify }, 'Log in with Spotify')
-          : m('div', { class: 'spotify-widget' }, [
-            m('div', { class: 'widget-head' }, [
-              m('div', { class: 'widget-lhs' }, [
-                m('div', { class: 'widget-image' }),
-                m('div', { class: 'widget-data' }, [
-                  m('div', { class: 'song-title' }, state.songTitle),
-                  m('span', { class: 'song-meta' },
-                    m('span', { class: 'song-artist' }, state.songArtist),
-                    ' - ',
-                    m('span', { class: 'song-album' }, state.songAlbum)
-                  )
+          ? m('div', { class: 'spotify-widget' }, [
+              m('div', { class: 'widget-head' }, [
+                m('div', { class: 'widget-lhs' }, [
+                  m('div', { class: 'widget-image' }),
+                  m('div', { class: 'widget-data' }, [
+                    m('div', { class: 'song-title' }, state.songTitle),
+                    m('span', { class: 'song-meta' },
+                      m('span', { class: 'song-artist' }, state.songArtist),
+                      ' - ',
+                      m('span', { class: 'song-album' }, state.songAlbum)
+                    )
+                  ])
+                ]),
+                m('div', { class: 'widget-rhs widget-buttons' }, [
+                  m('button', { class: 'material-icons-round' }, 'skip_previous'),
+                  m('button', { class: 'material-icons-round' }, 'skip_next')
                 ])
               ]),
-              m('div', { class: 'widget-rhs widget-buttons' }, [
-                m('button', { class: 'material-icons-round' }, 'skip_previous'),
-                m('button', { class: 'material-icons-round' }, 'skip_next')
-              ])
-            ]),
-            m('div', { class: 'widget-seek' }, [
-              m('input', { class: 'widget-slider', type: 'range' }),
-              m('div', { class: 'widget-times' }, [
-                m('div', { class: 'song-position' }, hhmmss(state.songPosition)),
-                m('div', { class: 'song-length' }, hhmmss(state.songLength))
+              m('div', { class: 'widget-seek' }, [
+                m('input', { class: 'widget-slider', type: 'range' }),
+                m('div', { class: 'widget-times' }, [
+                  m('div', { class: 'song-position' }, hhmmss(state.songPosition)),
+                  m('div', { class: 'song-length' }, hhmmss(state.songLength))
+                ])
               ])
             ])
-          ])
+          : m('button', { onclick: actions.openSpotify }, 'Log in with Spotify')
       : null
   ])
