@@ -15,7 +15,7 @@ const state = {
   noiseColor: '',
   beatsPitch: 200,
   beatsPattern: 'beta',
-  songTitle: 'Song Name',
+  songTitle: 'Song Title',
   songArtist: 'Artist',
   songAlbum: 'Album',
   songPosition: 0,
