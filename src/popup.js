@@ -14,7 +14,12 @@ const state = {
   paused: true,
   noiseColor: 'white',
   beatsPitch: 200,
-  beatsPattern: 'beta'
+  beatsPattern: 'beta',
+  songTitle: 'Song Name',
+  songArtist: 'Artist',
+  songAlbum: 'Album',
+  songPosition: 0,
+  songLength: 0
 }
 
 const actions = {
@@ -57,8 +62,16 @@ const actions = {
     }
   },
 
-  openSpotify () {
-    Spotify.open()
+  selectMode (event) {
+    state.mode = event.target.value
+  },
+
+  selectNoise (event) {
+    state.noiseColor = event.target.value
+  },
+
+  async openSpotify () {
+    state.token = await Spotify.auth()
   }
 }
 
