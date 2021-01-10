@@ -106,6 +106,8 @@ const actions = {
         Mood.playRain()
       } else if (state.moodType === 'water') {
         Mood.playWater()
+      } else if (state.moodType === 'forest') {
+        Mood.playForest()
       }
     }
   },

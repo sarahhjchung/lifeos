@@ -57,7 +57,7 @@ export default (state, actions) =>
       ? m('select', { class: 'noise-mode', onchange: actions.selectMood }, [
           m('option', { class: 'noise-type', value: 'rain' }, 'Rain'),
           m('option', { class: 'noise-type', value: 'water' }, 'Under Water'),
-          m('option', { class: 'noise-type', value: 'white' }, 'White')
+          m('option', { class: 'noise-type', value: 'forest' }, 'Forest')
         ])
       : null,
     state.mode === 'noise'
