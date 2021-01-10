@@ -9,7 +9,7 @@ const views = { init, work, done }
 
 const state = {
   view: 'init',
-  mode: 'none',
+  mode: 'brown',
   timer: 0, // in seconds
   paused: true,
   noiseColor: '',
@@ -74,7 +74,7 @@ const actions = {
   },
 
   selectNoise (event) {
-    Noise.stop()
+    actions.stopAudio()
     state.noiseColor = event.target.value
     actions.play()
   },
