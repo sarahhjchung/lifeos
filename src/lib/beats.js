@@ -19,14 +19,15 @@ right.frequency.setValueAtTime(430, context.currentTime)
 right.connect(splitter2)
 right.connect(merger2, 0, 0)
 
+left.start()
+right.start()
+
 export function playBeats () {
   merger.connect(context.destination)
-  left.start()
   merger2.connect(context.destination)
-  right.start()
 }
 
 export function stopBeats () {
-  left.stop()
-  right.stop()
+  merger.disconnect(context.destination)
+  merger2.disconnect(context.destination)
 }

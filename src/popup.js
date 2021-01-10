@@ -59,6 +59,8 @@ const actions = {
     state.paused = true
     if (state.mode === 'noise') {
       Noise.stop()
+    } else if (state.mode === 'beats') {
+      Beats.stopBeats()
     }
   },
 
