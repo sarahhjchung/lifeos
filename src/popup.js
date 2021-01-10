@@ -78,6 +78,8 @@ const actions = {
       Noise.setVolume(event.target.value)
     } else if (state.mode === 'beats') {
       Beats.setVolume(event.target.value)
+    } else if (state.mode === 'mood') {
+      Mood.setVolume(event.target.value)
     }
     actions.stopAudio()
     actions.playAudio()
@@ -122,6 +124,8 @@ const actions = {
       Beats.stopBeats()
     } else if (state.mode === 'spotify' && state.token) {
       Spotify.pause()
+    } else if (state.mode === 'mood') {
+      Mood.stop()
     }
   },
 
