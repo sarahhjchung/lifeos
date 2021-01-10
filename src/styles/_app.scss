@@ -13,6 +13,7 @@ body {
   margin: 20px;
   width: 280px;
   font-family: $font-content;
+  padding-bottom: 160px;
 }
 
 .title {
@@ -46,15 +47,19 @@ input::-webkit-inner-spin-button {
 
 .circles {
   display: flex;
-  width: 160px;
+  justify-content: center;
   margin: auto;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
 .circle {
-  width: 64px;
-  height: 64px;
+  color: white;
+  font-family: $font-display;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -78,6 +83,25 @@ input::-webkit-inner-spin-button {
 .circle.-mins {
   background: $blue-3;
   margin: 0 -16px;
+  position: relative;
+}
+
+.circle.-mins::before, .circle.-mins::after {
+  content: ":";
+  position: absolute;
+  color: inherit;
+  font-size: 1.25em;
+  font-weight: inherit;
+}
+
+.circle.-mins::before {
+  left: 0;
+  transform: translateX(50%);
+}
+
+.circle.-mins::after {
+  right: 0;
+  transform: translateX(-50%);
 }
 
 .circle.-secs {
@@ -85,12 +109,13 @@ input::-webkit-inner-spin-button {
 }
 
 .circle-number {
-  color: white;
   background: transparent;
+  color: white;
   font-family: $font-display;
   font-weight: bold;
-  font-size: 1.25rem;
+  font-size: 20px;
   text-align: center;
+  letter-spacing: 0.0625rem;
   width: 100%;
   outline: 0;
 }
@@ -116,17 +141,20 @@ input::-webkit-inner-spin-button {
 }
 
 .button {
-  background-color: $blue-3;
-  font-family: $font-content;
   color: white;
-  letter-spacing: 1px;
-  font-size: 12px;
+  background: $blue-3;
   border-radius: 24px;
-  font-weight: bold;
   border: none;
-  padding: 8px;
-  box-shadow: 0px 7px 10px #97CADB;
   outline: none;
+  padding: 8px;
+  font-size: 12px;
+  font-family: $font-content;
+  font-weight: bold;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 7px 10px #97CADB;
   width: 100%;
 }
 
@@ -187,6 +215,10 @@ input::-webkit-inner-spin-button {
   .replay:hover, .pause-play:hover {
     cursor: pointer;
   }
+
+select {
+  font-weight: bold;
+}
 
 .volume-slider {
   margin-left: 20px;
@@ -290,4 +322,18 @@ h2 {
 .snooze-button {
   float: left;
   background-color: $blue-2;
+}
+
+.bg {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.bg-wave {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }

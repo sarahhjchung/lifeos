@@ -78,6 +78,11 @@ const actions = {
     state.heartbeat = null
   },
 
+  finish () {
+    state.done = true
+    port.postMessage(['done'])
+  },
+
   playAudio () {
     if (state.mode === 'noise') {
       if (state.noiseColor === 'white') {
@@ -194,6 +199,24 @@ const actions = {
     }
   },
 
+  async prevSong () {
+    try {
+      await Spotify.prev()
+      await actions.updateSong()
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
+  async nextSong () {
+    try {
+      await Spotify.next()
+      await actions.updateSong()
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
   async updateSong () {
     const player = await Spotify.getPlayback()
     if (!player || !player.item) return
@@ -241,5 +264,9 @@ chrome.runtime.onInstalled.addListener(() => {
         actions.clearHeartbeat()
       })
     }
+  })
+
+  chrome.alarms.onAlarm.addListener(alarm => {
+    port.postMessage(['done'])
   })
 })

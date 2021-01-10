@@ -24,7 +24,7 @@ export default (state, actions) => {
       class: 'sound-buttons replay',
       onclick: actions.stop,
       disabled: !state.paused ? 'disabled' : null
-    }, m('span', { class: 'material-icons-round' }, 'replay')),
+    }, m('span', { class: 'material-icons-round' }, 'stop')),
     m('button', { class: 'sound-buttons pause-play', onclick: actions.toggle },
       state.paused
         ? m('span', { class: 'material-icons-round' }, 'play_arrow')
@@ -105,8 +105,8 @@ export default (state, actions) => {
                   ])
                 ]),
                 m('div', { class: 'widget-rhs widget-buttons' }, [
-                  m('button', { class: 'material-icons-round' }, 'skip_previous'),
-                  m('button', { class: 'material-icons-round' }, 'skip_next')
+                  m('button', { class: 'widget-prev material-icons-round', onclick: actions.prevSong }, 'skip_previous'),
+                  m('button', { class: 'widget-next material-icons-round', onclick: actions.nextSong }, 'skip_next')
                 ])
               ]),
               m('div', { class: 'widget-seek' }, [
@@ -125,6 +125,10 @@ export default (state, actions) => {
               ])
             ])
           : m('button', { class: 'spotify-log-in', onclick: actions.openSpotify }, 'Log in with Spotify')
-      : null
+      : null,
+    m('div', { class: 'bg' }, [
+      m('img', { src: '../assets/wave-dark.svg', class: 'bg-wave -dark' }),
+      m('img', { src: '../assets/wave-light.svg', class: 'bg-wave -light' })
+    ])
   ])
 }

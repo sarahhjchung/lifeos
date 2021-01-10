@@ -86,6 +86,14 @@ const actions = {
     state.token = await Spotify.auth()
     m.redraw() // force redraw
     port.postMessage(['authSpotify', state.token])
+  },
+
+  prevSong () {
+    port.postMessage(['prevSong'])
+  },
+
+  nextSong () {
+    port.postMessage(['nextSong'])
   }
 }
 

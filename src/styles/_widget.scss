@@ -27,8 +27,21 @@
   font-weight: bold;
 }
 
+.song-meta {
+  line-height: 1.25;
+}
+
 .widget-slider {
   width: 100%;
+  margin-top: 8px;
+}
+
+.widget-buttons {
+  display: flex;
+}
+
+.widget-next {
+  margin-left: 4px;
 }
 
 .widget-times {

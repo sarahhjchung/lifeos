@@ -25,5 +25,9 @@ export default (state, actions) =>
     m('div', { class: 'done-buttons' }, [
       m('button', { class: 'snooze-button' }, 'Snooze'),
       m('button', { class: 'ok-button', onclick: actions.stop }, 'Ok')
+    ]),
+    m('div', { class: 'bg' }, [
+      m('img', { src: '../assets/wave-dark.svg', class: 'bg-wave -dark' }),
+      m('img', { src: '../assets/wave-light.svg', class: 'bg-wave -light' })
     ])
   ])
