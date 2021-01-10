@@ -31,7 +31,7 @@ const actions = {
 
   queueTick () {
     if (state.alarm) return
-    state.alarm = setTimeout(actions.tick, 1000)
+    // state.alarm = window.setTimeout(actions.tick, 1000)
   },
 
   clearTick () {
@@ -96,22 +96,6 @@ const actions = {
     state.token = await Spotify.auth()
     m.redraw() // force redraw
     port.postMessage(['authSpotify', state.token])
-
-    let data = null
-    try {
-      data = await Spotify.getRecents()
-      console.log(data)
-    } catch (err) {
-      console.log(err)
-    }
-
-    const item = data.items.find(item => item.context && item.context.uri)
-    if (!item) {
-      return
-    }
-
-    console.log(item)
-    port.postMessage(['playSpotify', { context_uri: item.context.uri }])
   }
 }
 

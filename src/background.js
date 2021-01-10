@@ -108,8 +108,29 @@ const actions = {
     actions.playAudio()
   },
 
-  authSpotify (token) {
+  async authSpotify (token) {
     state.token = token
+    Spotify.use(token)
+
+    let data = null
+    try {
+      data = await Spotify.getRecents()
+      console.log(data)
+    } catch (err) {
+      console.log(err)
+    }
+
+    let item = null
+    if (data) {
+      item = data.items.find(item => item.context && item.context.uri)
+    }
+
+    if (!item) {
+      return
+    }
+
+    console.log(item)
+    actions.playSpotify({ context_uri: item.context.uri })
   },
 
   async playSpotify (params) {

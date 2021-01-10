@@ -23,6 +23,10 @@ function getURL (endpoint, clientId, scopes) {
     '&show_dialog=true'
 }
 
+export function use (t) {
+  token = t
+}
+
 export function auth () {
   return new Promise((resolve, reject) => {
     const url = getURL(endpoint, clientId, scopes)
