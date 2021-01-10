@@ -4,7 +4,7 @@ import { fromSeconds as hhmmss } from '../lib/hummus'
 // Work view (previously "playing state")
 export default (state, actions) =>
   m('main', [
-    m('h1', { class: 'title' }, 'Working...'),
+    m('h1', { class: 'title' }, 'Focus!'),
     m('div', { class: 'circles' }, [
       m('label', { for: 'timer-hours', class: 'circle -hours' }, [
         m('h2', { id: 'timer-hours' })
