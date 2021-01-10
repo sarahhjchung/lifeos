@@ -65,8 +65,8 @@ const actions = {
     state.noiseColor = event.target.value
   },
 
-  openSpotify () {
-    Spotify.open()
+  async openSpotify () {
+    state.token = await Spotify.auth()
   }
 }
 

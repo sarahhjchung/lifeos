@@ -14,7 +14,7 @@ export default (state, actions) =>
         : m('span', { class: 'material-icons-round' }, 'pause')),
     m('div', { class: 'volume' }, [
       m('span', { class: 'material-icons-round' }, 'volume_up'),
-      m('input', { type: 'range', min: 0, max: 100 })
+      m('input', { class: 'volume-slider', type: 'range', min: 0, max: 100 })
     ]),
     m('select', { onchange: actions.selectMode }, [
       m('option', { value: 'none' }, 'No sound'),
@@ -34,7 +34,7 @@ export default (state, actions) =>
           m('div', { class: 'pitch' }, [
             m('span', { class: 'material-icons-round' }, 'music_note'),
             m('span', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
-            m('input', { type: 'range', min: 5, max: 1000 })
+            m('input', { class: 'pitch-slider', type: 'range', min: 5, max: 1000 })
           ]),
           m('select', { onchange: actions.selectBeats }, [
             m('option', { value: 'brown' }, 'Brown'),
