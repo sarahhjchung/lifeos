@@ -4,13 +4,14 @@ $blue-3: #018abe;
 $blue-4: #02457a;
 $blue-5: #001b48;
 $charcoal: #323232;
-$font-display: 'Work Sans', sans-serif;
-$font-content: 'Quicksand', sans-serif;
+$font-display: 'Quicksand', sans-serif;
+$font-content: 'Work Sans', sans-serif;
 
 body {
+  color: $charcoal;
+  font-family: $font-content;
   margin: 20px;
   width: 320px;
-  font-family: $font-content;
 }
 
 .title {

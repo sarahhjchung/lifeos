@@ -16,6 +16,7 @@ export default (state, actions) =>
         m('input', { id: 'seconds', class: 'circle-input', placeholder: '00' })
       ])
     ]),
-    m('div', { class: 'center-button' },[
-    m('button', { class: 'start button', onclick: actions.start }, 'Start >')])
+    m('div', { class: 'center-button' }, [
+      m('button', { class: 'start button', onclick: actions.start }, 'Start >')
+    ])
   ])
