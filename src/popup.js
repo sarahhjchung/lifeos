@@ -9,10 +9,10 @@ const views = { init, work, done }
 
 const state = {
   view: 'init',
-  mode: 'brown',
+  mode: 'none',
   timer: 0, // in seconds
   paused: true,
-  noiseColor: '',
+  noiseColor: 'brown',
   beatsPitch: 200,
   beatsPattern: 'beta',
   songTitle: 'Song Title',
