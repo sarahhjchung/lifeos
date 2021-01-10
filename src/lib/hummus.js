@@ -21,6 +21,9 @@ export function fromSeconds (secsTotal) {
   return time
 }
 
-export function toSeconds () {
-
+export function toSeconds (currentTime) {
+  let secs = 0
+  const time = currentTime.split(':')
+  secs += parseInt(time[0]) * 60 * 60 + parseInt(time[1]) * 60 + parseInt(time[2])
+  return secs
 }
