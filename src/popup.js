@@ -96,16 +96,17 @@ const actions = {
         Noise.playPink()
       } else if (state.noiseColor === 'brown') {
         Noise.playBrown()
+      } else if (state.mode === 'beats') {
+        Beats.playBeats()
+      } else if (state.mode === 'spotify' && state.token) {
+        actions.playSpotify()
+      } else if (state.mode === 'mood') {
+        if (state.moodType === 'rain') {
+          Mood.playRain()
+        } else if (state.moodType === 'water') {
+          Mood.playWater()
+        }
       }
-    } else if (state.mode === 'beats') {
-      Beats.playBeats()
-    } else if (state.mode === 'spotify' && state.token) {
-      actions.playSpotify()
-    } else if (state.mode === 'mood') {
-      if (state.moodType === 'rain') {
-        Mood.playRain()
-      } else if (state.moodType === 'water') {
-        Mood.playWater()
     }
   },
 
