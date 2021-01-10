@@ -12,7 +12,13 @@ const state = {
   noiseColor: 'brown',
   beatsPitch: 200,
   beatsPattern: 'alpha',
-  song: null
+  songTitle: 'Song Title',
+  songArtist: 'Artist',
+  songAlbum: 'Album',
+  songImage: null,
+  songProgress: 0,
+  songDuration: 0,
+  token: null
 }
 
 const actions = {
@@ -100,6 +106,31 @@ const actions = {
     actions.stopAudio()
     Beats.setPattern(pattern)
     actions.playAudio()
+  },
+
+  authSpotify (token) {
+    state.token = token
+  },
+
+  async playSpotify (params) {
+    try {
+      await Spotify.play(params)
+      await actions.updateSong()
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
+  async updateSong () {
+    const song = await Spotify.getSong()
+    if (!song || !song.item) return
+    state.songTitle = song.item.name
+    state.songAlbum = song.item.album.name
+    state.songArtist = song.item.artists
+      .map(artist => artist.name).join(', ')
+    state.songImage = song.item.album.images[0].url
+    state.songProgress = Math.floor(song.progress_ms / 1000)
+    state.songDuration = Math.floor(song.item.duration_ms / 1000)
   }
 }
 

@@ -102,8 +102,8 @@ export default (state, actions) => {
                   value: state.songProgress
                 }),
                 m('div', { class: 'widget-times' }, [
-                  m('div', { class: 'song-position' }, hhmmss(state.songProgress)),
-                  m('div', { class: 'song-length' }, hhmmss(state.songDuration))
+                  m('div', { class: 'song-position' }, fromSeconds(state.songProgress)),
+                  m('div', { class: 'song-length' }, fromSeconds(state.songDuration))
                 ])
               ])
             ])
