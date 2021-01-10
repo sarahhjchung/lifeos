@@ -10,14 +10,14 @@ export default (state, actions) => {
   return m('main', [
     m('h1', { class: 'title' }, 'Working...'),
     m('div', { class: 'circles' }, [
-      m('label', { for: 'hours', class: 'circle -hours' }, [
-        m('span', { class: 'circle-label' }, hours)
+      m('label', { for: 'timer-hours', class: 'circle -hours' }, [
+        m('h2', { id: 'circle-label' }, hours)
       ]),
-      m('label', { for: 'mins', class: 'circle -mins' }, [
-        m('span', { class: 'circle-label' }, mins)
+      m('label', { for: 'timer-minutes', class: 'circle -mins' }, [
+        m('h2', { id: 'circle-label' }, mins)
       ]),
-      m('label', { for: 'secs', class: 'circle -secs' }, [
-        m('span', { class: 'circle-label' }, secs)
+      m('label', { for: 'timer-seconds', class: 'circle -secs' }, [
+        m('h2', { id: 'circle-label' }, secs)
       ])
     ]),
     m('button', {
@@ -38,26 +38,29 @@ export default (state, actions) => {
         m('option', { value: 'none', selected: state.mode === 'none' }, 'No sound'),
         m('option', { value: 'noise', selected: state.mode === 'noise' }, 'Noise'),
         m('option', { value: 'beats', selected: state.mode === 'beats' }, 'Binaural beats'),
+        m('option', { value: 'ambience', selected: state.mode === 'ambience' }, 'Ambience'),
         m('option', { value: 'spotify', selected: state.mode === 'spotify' }, 'Spotify')
       ])
     ),
     state.mode === 'noise'
-      ? m('select', { class: 'noise-mode', onchange: actions.selectNoise }, [
-          m('option', { class: 'noise-type', value: 'brown', selected: state.noiseColor === 'brown' }, 'Brown'),
-          m('option', { class: 'noise-type', value: 'pink', selected: state.noiseColor === 'pink' }, 'Pink'),
-          m('option', { class: 'noise-type', value: 'white', selected: state.noiseColor === 'white' }, 'White')
+      ? m('div', { class: 'noise-div' }, [
+          m('select', { class: 'noise-mode', onchange: actions.selectNoise }, [
+            m('option', { class: 'noise-type', value: 'brown', selected: state.noiseColor === 'brown' }, 'Brown'),
+            m('option', { class: 'noise-type', value: 'pink', selected: state.noiseColor === 'pink' }, 'Pink'),
+            m('option', { class: 'noise-type', value: 'white', selected: state.noiseColor === 'white' }, 'White')
+          ])
         ])
       : null,
     state.mode === 'beats'
       ? m('div', { class: 'beats-settings' }, [
           m('div', { class: 'pitch' }, [
-            m('span', { class: 'material-icons-round' }, 'music_note'),
+            m('span', { class: 'material-icons-round music-note' }, 'music_note'),
             m('span', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
             m('input', {
               class: 'pitch-slider',
               type: 'range',
-              min: 5,
-              max: 1000,
+              min: 100,
+              max: 500,
               value: state.beatsPitch,
               onchange: actions.changePitch
             })
@@ -70,6 +73,15 @@ export default (state, actions) => {
             m('option', { value: 'gamma', selected: state.beatsPattern === 'gamma' }, 'Gamma')
           ])
         ])
+      : null,
+    state.mode === 'ambience'
+      ? m('div', { class: 'noise-div' }, [
+          m('select', { class: 'noise-mode', onchange: actions.selectAmbience }, [
+            m('option', { class: 'noise-type', value: 'rain', selected: state.ambience === 'rain' }, 'Rain'),
+            m('option', { class: 'noise-type', value: 'water', selected: state.ambience === 'water' }, 'Underwater'),
+            m('option', { class: 'noise-type', value: 'forest', selected: state.ambience === 'forest' }, 'Forest'),
+            m('option', { class: 'noise-type', value: 'street', selected: state.ambience === 'street' }, 'Street')
+          ])])
       : null,
     state.mode === 'spotify'
       ? state.token

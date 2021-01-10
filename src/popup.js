@@ -77,6 +77,11 @@ const actions = {
     port.postMessage(['changeBeats', state.beatsPattern])
   },
 
+  selectAmbience (event) {
+    state.ambience = event.target.value
+    port.postMessage(['changeAmbience', state.ambience])
+  },
+
   async openSpotify () {
     state.token = await Spotify.auth()
     m.redraw() // force redraw

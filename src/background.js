@@ -1,5 +1,6 @@
 import * as Noise from './lib/noise'
 import * as Beats from './lib/beats'
+import * as Ambience from './lib/ambience'
 import * as Spotify from './lib/spotify'
 
 let port = null
@@ -15,6 +16,7 @@ const state = {
   noiseColor: 'brown',
   beatsPitch: 200,
   beatsPattern: 'alpha',
+  ambience: 'rain',
   songTitle: 'Song Title',
   songArtist: 'Artist',
   songAlbum: 'Album',
@@ -87,6 +89,16 @@ const actions = {
       }
     } else if (state.mode === 'beats') {
       Beats.playBeats()
+    } else if (state.mode === 'ambience') {
+      if (state.ambience === 'rain') {
+        Ambience.playRain()
+      } else if (state.ambience === 'water') {
+        Ambience.playWater()
+      } else if (state.ambience === 'forest') {
+        Ambience.playForest()
+      } else if (state.ambience === 'street') {
+        Ambience.playStreet()
+      }
     } else if (state.mode === 'spotify' && state.token) {
       actions.playSpotify()
     }
@@ -97,6 +109,8 @@ const actions = {
       Noise.stop()
     } else if (state.mode === 'beats') {
       Beats.stopBeats()
+    } else if (state.mode === 'ambience') {
+      Ambience.stop()
     } else if (state.mode === 'spotify' && state.token) {
       Spotify.pause()
     }
@@ -106,6 +120,7 @@ const actions = {
     state.volume = volume
     Noise.setVolume(volume)
     Beats.setVolume(volume)
+    Ambience.setVolume(volume)
     actions.stopAudio()
     actions.playAudio()
   },
@@ -118,7 +133,11 @@ const actions = {
   },
 
   changeMode (mode) {
-    actions.stopAudio()
+    if (state.mode !== 'beats') {
+      actions.stopAudio()
+    } else if (!state.paused) {
+      actions.stopAudio()
+    }
     state.mode = mode
     actions.playAudio()
   },
@@ -132,6 +151,12 @@ const actions = {
   changeBeats (pattern) {
     actions.stopAudio()
     Beats.setPattern(pattern)
+    actions.playAudio()
+  },
+
+  changeAmbience (ambience) {
+    actions.stopAudio()
+    state.ambience = ambience
     actions.playAudio()
   },
 

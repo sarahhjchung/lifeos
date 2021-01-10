@@ -36,6 +36,12 @@ body {
   padding-top: 0;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /*--- Timer ---*/
 
 .circles {
@@ -50,15 +56,23 @@ body {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  opacity: 0.7;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0.7;
+}
+
+.circle:hover input {
+  opacity: 0.5;
 }
 
 .circle.-hours {
   background: $blue-5;
   opacity: 1;
+}
+
+.circle.-hours input:hover {
+  opacity: 0.7;
 }
 
 .circle.-mins {
@@ -117,38 +131,42 @@ body {
 
   .button:hover {
     opacity: 0.7;
+    cursor: pointer;
   }
 
 /*--- start state ---*/
 
-.mode-wrapper, .beats-settings {
+.mode-wrapper, .noise-div {
+  width: 240px;
+  margin: auto;
+  padding: 8px;
+  border-radius: 24px;
+  border: 2px solid $blue-2;
+  margin-top: 10px;
+}
+
+.beats-settings {
   width: 240px;
   margin: auto;
   padding-top: 10px;
-  padding-bottom: 10px;
-  border-radius: 24px;
 }
 
-.mode {
-  outline: solid;
-  outline-width: 2px;
-  outline-color: $blue-2;
+.mode, .noise-mode {
+  outline: none;
   width: 100%;
-  padding: 8px;
+  // padding: 8px;
 }
 
-.noise-mode {
-  outline: solid;
-  outline-width: 2px;
-  outline-color: $blue-2;
-  width: 240px;
-  margin-left: 20px;
-  padding: 8px;
+.music-note {
+  z-index: -10;
 }
 
 .sound-buttons, .material-icons-round {
-  background-color: white;
   outline: none;
+}
+
+.sound-buttons {
+  background-color: white;
 }
 
 .replay {
@@ -157,33 +175,34 @@ body {
 
 .replay, .pause-play, .volume {
   display: inline-block;
+  padding-left: 5px;
 }
 
-.sound-on, .pause-play {
-  margin-left: 5px;
-}
+  .replay:hover, .pause-play:hover {
+    cursor: pointer;
+  }
 
 .volume-slider {
-  margin-left: 10px;
+  margin-left: 20px;
   margin-bottom: 3px;
   padding-bottom: 4px;
+  width: 100px;
 }
 
 .pitch {
   display: inline-block;
-  outline: solid;
-  outline-width: 2px;
-  outline-color: $blue-2;
+  border: 2px solid $blue-2;
   padding: 3px;
+  border-radius: 24px;
 }
 
 .beats-mode {
-  outline: solid;
-  outline-width: 2px;
-  outline-color: $blue-2;
-  width: 70px;
+  width: 80px;
   padding: 8px;
   float: right;
+  border-radius: 24px;
+  border: 2px solid $blue-2;
+  outline: none;
 }
 
 .pitch-hz {
@@ -210,8 +229,51 @@ body {
   box-shadow: 0px 7px 10px #94e9b1;
   outline: none;
   margin-left: 20px;
+  margin-top: 10px;
 }
 
   .spotify-log-in:hover {
     opacity: 0.7;
+    cursor: pointer;
   }
+
+// done state timer
+h2 {
+  color: white;
+}
+
+.done-buttons {
+  width: 220px;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 60px;
+}
+
+.snooze-button, .ok-button {
+  width: 47%;
+  color: white;
+  font-family: $font-content;
+  letter-spacing: 1px;
+  font-size: 12px;
+  border-radius: 24px;
+  font-weight: bold;
+  border: none;
+  padding: 8px;
+  box-shadow: 0px 7px 10px #97CADB;
+  outline: none;
+}
+
+.ok-button {
+  float: right;
+  background-color: $blue-3;
+}
+
+  .ok-button:hover, .snooze-button:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+.snooze-button {
+  float: left;
+  background-color: $blue-2;
+}
