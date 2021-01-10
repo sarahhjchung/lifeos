@@ -1,8 +1,9 @@
 const duration = 5
-let amplitude = 0.1
+const amplitude = 0.1125
+let volume = 0.5
 
-export function volume (v) {
-  amplitude = v / 100
+export function setVolume (v) {
+  volume = v / 100
 }
 
 const context = new window.AudioContext()
@@ -22,9 +23,12 @@ let noise = null
 export function playWhite () {
   if (noise) return
   noise = context.createBufferSource()
+  const gainNode = context.createGain()
   noise.buffer = buffer
   noise.loop = true
-  noise.connect(context.destination)
+  noise.connect(gainNode)
+  gainNode.connect(context.destination)
+  gainNode.gain.setValueAtTime(volume, context.currentTime)
   noise.start()
 }
 
@@ -51,9 +55,12 @@ for (let i = 0; i < pinkBufferSize; i++) {
 export function playPink () {
   if (noise) return
   noise = context.createBufferSource()
+  const gainNode = context.createGain()
   noise.buffer = pinkBuffer
   noise.loop = true
-  noise.connect(context.destination)
+  noise.connect(gainNode)
+  gainNode.connect(context.destination)
+  gainNode.gain.setValueAtTime(volume, context.currentTime)
   noise.start()
 }
 
@@ -73,9 +80,12 @@ for (let i = 0; i < brownBufferSize; i++) {
 export function playBrown () {
   if (noise) return
   noise = context.createBufferSource()
+  const gainNode = context.createGain()
   noise.buffer = brownBuffer
   noise.loop = true
-  noise.connect(context.destination)
+  noise.connect(gainNode)
+  gainNode.connect(context.destination)
+  gainNode.gain.setValueAtTime(volume, context.currentTime)
   noise.start()
 }
 
