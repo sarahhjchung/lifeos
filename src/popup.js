@@ -11,7 +11,7 @@ const views = { init, work, done }
 const state = {
   view: 'init',
   mode: 'none',
-  timer: 0, // in seconds
+  timer: 1500, // in seconds
   timeout: null,
   paused: true,
   volume: 50,
