@@ -12,7 +12,7 @@ const state = {
   mode: 'none',
   timer: 0, // in seconds
   paused: true,
-  noiseColor: 'white',
+  noiseColor: '',
   beatsPitch: 200,
   beatsPattern: 'beta',
   songTitle: 'Song Name',
@@ -42,7 +42,13 @@ const actions = {
   playAudio () {
     state.paused = false
     if (state.mode === 'noise') {
-      Noise.play()
+      if (state.noiseColor === 'white') {
+        Noise.playWhite()
+      } else if (state.noiseColor === 'pink') {
+        Noise.playPink()
+      } else if (state.noiseColor === 'brown') {
+        Noise.playBrown()
+      }
     }
   },
 
@@ -64,10 +70,13 @@ const actions = {
 
   selectMode (event) {
     state.mode = event.target.value
+    actions.playAudio()
   },
 
   selectNoise (event) {
+    Noise.stop()
     state.noiseColor = event.target.value
+    actions.play()
   },
 
   async openSpotify () {
