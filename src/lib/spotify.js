@@ -44,21 +44,46 @@ export function auth () {
 }
 
 export function play (params) {
-  if (!token) return
-  m.request({
-    method: 'PUT',
-    url: 'https://api.spotify.com/v1/me/player/play',
-    headers: { Authorization: 'Bearer ' + token },
-    body: params
+  return new Promise((resolve, reject) => {
+    if (!token) {
+      return reject(new Error('Failed to play song:' +
+        ' User is not authenticated'))
+    }
+    m.request({
+      method: 'PUT',
+      url: 'https://api.spotify.com/v1/me/player/play',
+      headers: { Authorization: 'Bearer ' + token }
+    }).then(res => resolve(res))
+      .catch(err => reject(new Error(err)))
   })
 }
 
 export function pause () {
-  if (!token) return
-  m.request({
-    method: 'PUT',
-    url: 'https://api.spotify.com/v1/me/player/pause',
-    headers: { Authorization: 'Bearer ' + token }
+  return new Promise((resolve, reject) => {
+    if (!token) {
+      return reject(new Error('Failed to pause song:' +
+        ' User is not authenticated'))
+    }
+    m.request({
+      method: 'PUT',
+      url: 'https://api.spotify.com/v1/me/player/pause',
+      headers: { Authorization: 'Bearer ' + token }
+    }).then(res => resolve(res))
+      .catch(err => reject(JSON.stringify(err)))
+  })
+}
+
+export function getSong () {
+  return new Promise((resolve, reject) => {
+    if (!token) {
+      return reject(new Error('Failed to retrieve currently playing songs:' +
+        ' User is not authenticated'))
+    }
+    m.request({
+      url: 'https://api.spotify.com/v1/me/player/currently-playing',
+      headers: { Authorization: 'Bearer ' + token }
+    }).then(data => resolve(data))
+      .catch(err => reject(JSON.stringify(err)))
   })
 }
 
@@ -66,11 +91,12 @@ export function getRecents () {
   return new Promise((resolve, reject) => {
     if (!token) {
       return reject(new Error('Failed to retrieve recently played songs:' +
-        'User is not authenticated'))
+        ' User is not authenticated'))
     }
     m.request({
       url: 'https://api.spotify.com/v1/me/player/recently-played',
       headers: { Authorization: 'Bearer ' + token }
     }).then(data => resolve(data))
+      .catch(err => reject(JSON.stringify(err)))
   })
 }

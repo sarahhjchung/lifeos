@@ -19,8 +19,9 @@ const state = {
   songTitle: 'Song Title',
   songArtist: 'Artist',
   songAlbum: 'Album',
-  songPosition: 0,
-  songLength: 0
+  songImage: null,
+  songProgress: 0,
+  songDuration: 0
 }
 
 const actions = {
@@ -52,7 +53,7 @@ const actions = {
       }
     } else if (state.mode === 'beats') {
       Beats.playBeats()
-    } else if (state.mode === 'spotify') {
+    } else if (state.mode === 'spotify' && state.token) {
       Spotify.play()
     }
   },
@@ -63,7 +64,7 @@ const actions = {
       Noise.stop()
     } else if (state.mode === 'beats') {
       Beats.stopBeats()
-    } else if (state.mode === 'spotify') {
+    } else if (state.mode === 'spotify' && state.token) {
       Spotify.pause()
     }
   },
@@ -98,11 +99,27 @@ const actions = {
   async openSpotify () {
     state.token = await Spotify.auth()
     m.redraw() // force redraw
+
     const data = await Spotify.getRecents()
     const item = data.items.find(item => item.context.uri)
-    if (item) {
-      Spotify.play({ context_uri: item.uri })
+    if (!item) {
+      return
     }
+
+    try {
+      await Spotify.play({ context_uri: item.context.uri })
+    } catch (err) {
+      console.log(err)
+    }
+
+    const song = await Spotify.getSong()
+    state.songTitle = song.item.name
+    state.songAlbum = song.item.album.name
+    state.songArtist = song.item.artists
+      .map(artist => artist.name).join(', ')
+    state.songImage = song.item.album.images[0].url
+    state.songProgress = Math.floor(song.progress_ms / 1000)
+    state.songDuration = Math.floor(song.item.duration_ms / 1000)
   }
 }
 

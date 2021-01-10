@@ -65,7 +65,9 @@ export default (state, actions) =>
           ? m('div', { class: 'spotify-widget' }, [
               m('div', { class: 'widget-head' }, [
                 m('div', { class: 'widget-lhs' }, [
-                  m('div', { class: 'widget-image' }),
+                  state.songImage
+                    ? m('img', { class: 'widget-image', src: state.songImage })
+                    : m('div', { class: 'widget-image' }),
                   m('div', { class: 'widget-data' }, [
                     m('div', { class: 'song-title' }, state.songTitle),
                     m('span', { class: 'song-meta' },
@@ -83,8 +85,8 @@ export default (state, actions) =>
               m('div', { class: 'widget-seek' }, [
                 m('input', { class: 'widget-slider', type: 'range' }),
                 m('div', { class: 'widget-times' }, [
-                  m('div', { class: 'song-position' }, hhmmss(state.songPosition)),
-                  m('div', { class: 'song-length' }, hhmmss(state.songLength))
+                  m('div', { class: 'song-position' }, hhmmss(state.songProgress)),
+                  m('div', { class: 'song-length' }, hhmmss(state.songDuration))
                 ])
               ])
             ])
