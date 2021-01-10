@@ -31,7 +31,7 @@ export default (state, actions) => {
         : m('span', { class: 'material-icons-round' }, 'pause')),
     m('div', { class: 'volume' }, [
       m('span', { class: 'material-icons-round' }, 'volume_up'),
-      m('input', { class: 'volume-slider', type: 'range', min: 0, max: 100, onchange: actions.changeVolume })
+      m('input', { class: 'volume-slider', type: 'range', min: 0, max: 100, defaultValue: state.volume, onchange: actions.changeVolume })
     ]),
     m('div', { class: 'mode-wrapper' },
       m('select', { class: 'mode', onchange: actions.selectMode }, [
@@ -55,6 +55,7 @@ export default (state, actions) => {
       ? m('div', { class: 'beats-settings' }, [
           m('div', { class: 'pitch' }, [
             m('span', { class: 'material-icons-round music-note' }, 'music_note'),
+<<<<<<< HEAD
             m('span', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
             m('input', {
               class: 'pitch-slider',
@@ -64,6 +65,10 @@ export default (state, actions) => {
               value: state.beatsPitch,
               onchange: actions.changePitch
             })
+=======
+            m('h3', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
+            m('input', { class: 'pitch-slider', type: 'range', min: 50, max: 500, defaultValue: state.beatsPitch, onchange: actions.changeHz })
+>>>>>>> master
           ]),
           m('select', { class: 'beats-mode', onchange: actions.selectBeats }, [
             m('option', { value: 'delta', selected: state.beatsPattern === 'delta' }, 'Delta'),
