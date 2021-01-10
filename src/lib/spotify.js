@@ -43,12 +43,13 @@ export function auth () {
   })
 }
 
-export function play () {
+export function play (params) {
   if (!token) return
   m.request({
     method: 'PUT',
     url: 'https://api.spotify.com/v1/me/player/play',
-    headers: { Authorization: 'Bearer ' + token }
+    headers: { Authorization: 'Bearer ' + token },
+    body: params
   })
 }
 

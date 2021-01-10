@@ -92,7 +92,10 @@ const actions = {
     state.token = await Spotify.auth()
     m.redraw() // force redraw
     const data = await Spotify.getRecents()
-    window.alert(JSON.stringify(data))
+    const item = data.items.find(item => item.context.uri)
+    if (item) {
+      Spotify.play({ context_uri: item.uri })
+    }
   }
 }
 
