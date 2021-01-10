@@ -3,7 +3,7 @@ const water = new Audio('../assets/ambience-water.mp3')
 const forest = new Audio('../assets/ambience-forest.mp3')
 const street = new Audio('../assets/ambience-street.mp3')
 
-let volume = 0.1
+let volume = 0.5
 
 export function setVolume (v) {
   volume = v / 100
