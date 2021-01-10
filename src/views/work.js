@@ -17,17 +17,17 @@ export default (state, actions) =>
       ])
     ]),
     m('button', {
-      class: 'sound-buttons',
+      class: 'sound-buttons replay',
       onclick: actions.stop,
       disabled: !state.paused ? 'disabled' : null
     }, m('span', { class: 'material-icons-round' }, 'replay')),
-    m('button', { class: 'sound-buttons', onclick: actions.toggleAudio },
+    m('button', { class: 'sound-buttons pause-play', onclick: actions.toggleAudio },
       state.paused
         ? m('span', { class: 'material-icons-round' }, 'play_arrow')
         : m('span', { class: 'material-icons-round' }, 'pause')),
     m('div', { class: 'volume' }, [
       m('span', { class: 'material-icons-round' }, 'volume_up'),
-      m('input', { class: 'volume-slider', type: 'range', min: 0, max: 100 })
+      m('input', { class: 'volume-slider', type: 'range', min: 0, max: 100, onchange: actions.changeVolume })
     ]),
     m('div', { class: 'mode-wrapper' },
       m('select', { class: 'mode', onchange: actions.selectMode }, [
@@ -38,20 +38,20 @@ export default (state, actions) =>
       ])
     ),
     state.mode === 'noise'
-      ? m('select', { class: 'mode', onchange: actions.selectNoise }, [
+      ? m('select', { class: 'noise-mode', onchange: actions.selectNoise }, [
           m('option', { class: 'noise-type', value: 'brown' }, 'Brown'),
           m('option', { class: 'noise-type', value: 'pink' }, 'Pink'),
           m('option', { class: 'noise-type', value: 'white' }, 'White')
         ])
       : null,
     state.mode === 'beats'
-      ? m('div', [
+      ? m('div', { class: 'beats-settings' }, [
           m('div', { class: 'pitch' }, [
             m('span', { class: 'material-icons-round' }, 'music_note'),
             m('span', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
             m('input', { class: 'pitch-slider', type: 'range', min: 5, max: 1000 })
           ]),
-          m('select', { onchange: actions.selectBeats }, [
+          m('select', { class: 'beats-mode', onchange: actions.selectBeats }, [
             m('option', { value: 'delta' }, 'Delta'),
             m('option', { value: 'theta' }, 'Theta'),
             m('option', { value: 'alpha' }, 'Alpha'),
@@ -96,6 +96,6 @@ export default (state, actions) =>
                 ])
               ])
             ])
-          : m('button', { onclick: actions.openSpotify }, 'Log in with Spotify')
+          : m('button', { class: 'spotify-log-in', onclick: actions.openSpotify }, 'Log in with Spotify')
       : null
   ])

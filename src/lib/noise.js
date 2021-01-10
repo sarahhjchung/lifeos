@@ -1,5 +1,7 @@
 const duration = 5
-const amplitude = 0.125
+const amplitude = 0.1125
+let volume = 0.5
+
 const context = new window.AudioContext()
 const bufferSize = context.sampleRate * duration
 const buffer = context.createBuffer(1, 22050, context.sampleRate)
@@ -20,6 +22,7 @@ export function playWhite () {
   noise.buffer = buffer
   noise.loop = true
   noise.connect(context.destination)
+  noise.gain.setValueAtTime(volume, context.currentTime)
   noise.start()
 }
 

@@ -14,6 +14,7 @@ const state = {
   timer: 0, // in seconds
   timeout: null,
   paused: true,
+  volume: 30,
   noiseColor: 'brown',
   beatsPitch: 200,
   beatsPattern: 'alpha',
@@ -69,6 +70,11 @@ const actions = {
     }
   },
 
+  changeVolume (event) {
+    state.volume = event.target.value
+    // Noise.volume(event.target.value)
+  },
+
   playAudio () {
     state.paused = false
     actions.queueUpdate()
@@ -119,6 +125,7 @@ const actions = {
   },
 
   async selectMode (event) {
+    actions.stopAudio()
     state.mode = event.target.value
     actions.playAudio()
   },
@@ -126,13 +133,12 @@ const actions = {
   selectNoise (event) {
     actions.stopAudio()
     state.noiseColor = event.target.value
-    actions.play()
+    actions.playAudio()
   },
 
   selectBeats (event) {
-    actions.stopAudio()
     state.beatsPattern = event.target.value
-    Beats.setPattern(state.beatsPattern)
+    Beats.setPattern(event.target.value)
     actions.play()
   },
 
