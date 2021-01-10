@@ -20,7 +20,16 @@ export function playWater () {
   underWater.play()
 }
 
+const forest = new Audio('../assets/music/forest.mp3')
+
+export function playForest () {
+  forest.volume = volume
+  forest.loop = true
+  forest.play()
+}
+
 export function stop () {
   rain.pause()
   underWater.pause()
+  forest.pause()
 }
