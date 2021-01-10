@@ -31,17 +31,25 @@ body {
   padding-top: 0;
 }
 
+.circles {
+  width: 60%;
+  margin: auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
 .circles-dark {
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   background-color: $blue-5;
   border-radius: 50%;
   display: inline-block;
+  margin-left: 12px;
 }
 
 .circles-medium {
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   background-color: $blue-3;
   opacity: 0.7;
   border-radius: 50%;
@@ -51,14 +59,21 @@ body {
 }
 
 .circles-light {
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   background-color: $blue-2;
   opacity: 0.7;
   border-radius: 50%;
   display: inline-block;
   position: relative;
   right: 20px;
+}
+
+.input {
+  outline: solid;
+  width: 20px;
+  display: inline-block;
+  margin: 5px;
 }
 
 .button {
@@ -74,6 +89,7 @@ body {
   padding: 8px;
   box-shadow: 0px 7px 10px #97CADB;
   outline: none;
+  margin-bottom: 20px;
 }
 
   .button:hover{
