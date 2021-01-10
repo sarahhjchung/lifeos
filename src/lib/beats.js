@@ -3,7 +3,7 @@ const context = new window.AudioContext()
 let volume = 0.5
 
 export function setVolume (v) {
- volume = v / 100
+  volume = v / 100
 }
 
 // current Hz

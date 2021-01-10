@@ -74,6 +74,8 @@ const actions = {
     state.volume = event.target.value
     if (state.mode === 'noise') {
       Noise.setVolume(event.target.value)
+    } else if (state.mode === 'beats') {
+      Beats.setVolume(event.target.value)
     }
     actions.stopAudio()
     actions.playAudio()
