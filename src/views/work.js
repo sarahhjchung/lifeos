@@ -76,15 +76,18 @@ export default (state, actions) => {
           ? m('div', { class: 'spotify-widget' }, [
               m('div', { class: 'widget-head' }, [
                 m('div', { class: 'widget-lhs' }, [
-                  state.songImage
-                    ? m('img', { class: 'widget-image', src: state.songImage })
+                  state.song && state.song.image
+                    ? m('img', { class: 'widget-image', src: state.song.image })
                     : m('div', { class: 'widget-image' }),
                   m('div', { class: 'widget-data' }, [
-                    m('div', { class: 'song-title' }, state.songTitle),
+                    m('div', { class: 'song-title' },
+                      state.song ? state.song.title : 'Song Name'),
                     m('span', { class: 'song-meta' },
-                      m('span', { class: 'song-artist' }, state.songArtist),
+                      m('span', { class: 'song-artist' },
+                        state.song ? state.song.artist : 'Artist'),
                       ' - ',
-                      m('span', { class: 'song-album' }, state.songAlbum)
+                      m('span', { class: 'song-album' },
+                        state.song ? state.song.album : 'Album')
                     )
                   ])
                 ]),
@@ -98,12 +101,13 @@ export default (state, actions) => {
                   class: 'widget-slider',
                   type: 'range',
                   min: 0,
-                  max: state.songDuration,
-                  value: state.songProgress
+                  max: state.song && state.song.duration,
+                  value: state.song && state.song.progress,
+                  disabled: !state.song
                 }),
                 m('div', { class: 'widget-times' }, [
-                  m('div', { class: 'song-position' }, fromSeconds(state.songProgress)),
-                  m('div', { class: 'song-length' }, fromSeconds(state.songDuration))
+                  m('div', { class: 'song-position' }, fromSeconds(state.song ? state.song.progress : 0)),
+                  m('div', { class: 'song-length' }, fromSeconds(state.song ? state.song.duration : 0))
                 ])
               ])
             ])

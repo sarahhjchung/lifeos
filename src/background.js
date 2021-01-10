@@ -145,23 +145,18 @@ const actions = {
   },
 
   async updateSong () {
-    const song = await Spotify.getSong()
-    if (!song || !song.item) return
-    state.songTitle = song.item.name
-    state.songAlbum = song.item.album.name
-    state.songArtist = song.item.artists
-      .map(artist => artist.name).join(', ')
-    state.songImage = song.item.album.images[0].url
-    state.songProgress = Math.floor(song.progress_ms / 1000)
-    state.songDuration = Math.floor(song.item.duration_ms / 1000)
-    port.postMessage(['song', {
-      songTitle: state.songTitle,
-      songAlbum: state.songAlbum,
-      songArtist: state.songArtist,
-      songImage: state.songImage,
-      songProgress: state.songProgress,
-      songDuration: state.songDuration
-    }])
+    const player = await Spotify.getPlayback()
+    if (!player || !player.item) return
+    state.song = {
+      title: player.item.name,
+      album: player.item.album.name,
+      artist: player.item.artists
+        .map(artist => artist.name).join(', '),
+      image: player.item.album.images[0].url,
+      progress: Math.floor(player.progress_ms / 1000),
+      duration: Math.floor(player.item.duration_ms / 1000)
+    }
+    port.postMessage(['song', state.song])
   }
 }
 

@@ -112,7 +112,7 @@ port.onMessage.addListener(message => {
         : 'not found'
     })
   } else if (msgtype === 'song') {
-    Object.assign(state, msgdata[0])
+    state.song = msgdata[0]
     m.redraw()
   }
 })
