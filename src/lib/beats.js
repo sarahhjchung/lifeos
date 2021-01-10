@@ -7,7 +7,7 @@ export function setVolume (v) {
 }
 
 // current Hz
-let hz = 300
+let hz = 200
 
 export function setHz (e) {
   hz = e
