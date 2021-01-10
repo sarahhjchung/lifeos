@@ -34,7 +34,7 @@ export default (state, actions) =>
         m('option', { value: 'none' }, 'No sound'),
         m('option', { value: 'noise' }, 'Noise'),
         m('option', { value: 'beats' }, 'Binaural beats'),
-        m('option', { value: 'spotify' }, 'Your spotify playlist')
+        m('option', { value: 'spotify' }, 'Spotify')
       ])
     ),
     state.mode === 'noise'
@@ -83,7 +83,13 @@ export default (state, actions) =>
                 ])
               ]),
               m('div', { class: 'widget-seek' }, [
-                m('input', { class: 'widget-slider', type: 'range' }),
+                m('input', {
+                  class: 'widget-slider',
+                  type: 'range',
+                  min: 0,
+                  max: state.songDuration,
+                  value: state.songProgress
+                }),
                 m('div', { class: 'widget-times' }, [
                   m('div', { class: 'song-position' }, hhmmss(state.songProgress)),
                   m('div', { class: 'song-length' }, hhmmss(state.songDuration))

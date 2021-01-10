@@ -101,7 +101,9 @@ const actions = {
     m.redraw() // force redraw
 
     const data = await Spotify.getRecents()
-    const item = data.items.find(item => item.context.uri)
+    console.log(data)
+
+    const item = data.items.find(item => item.context && item.context.uri)
     if (!item) {
       return
     }
