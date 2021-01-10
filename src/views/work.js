@@ -62,13 +62,14 @@ export default (state, actions) =>
             m('h3', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
             m('input', { class: 'pitch-slider', type: 'range', min: 100, max: 500, onchange: actions.changeHz })
           ]),
-          m('select', { class: 'beats-mode', onchange: actions.selectBeats }, [
-            m('option', { value: 'delta' }, 'Delta'),
-            m('option', { value: 'theta' }, 'Theta'),
-            m('option', { value: 'alpha' }, 'Alpha'),
-            m('option', { value: 'beta' }, 'Beta'),
-            m('option', { value: 'gamma' }, 'Gamma')
-          ])
+          m('div', { class: 'pattern' }, [
+            m('select', { class: 'beats-mode', onchange: actions.selectBeats }, [
+              m('option', { value: 'delta' }, 'Delta'),
+              m('option', { value: 'theta' }, 'Theta'),
+              m('option', { value: 'alpha' }, 'Alpha'),
+              m('option', { value: 'beta' }, 'Beta'),
+              m('option', { value: 'gamma' }, 'Gamma')
+            ])])
         ])
       : null,
     state.mode === 'spotify'
