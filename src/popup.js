@@ -30,8 +30,7 @@ const actions = {
   },
 
   queueTick () {
-    if (state.alarm) return
-    // state.alarm = window.setTimeout(actions.tick, 1000)
+    // ticks should be received from bg process
   },
 
   clearTick () {
@@ -112,5 +111,8 @@ port.onMessage.addListener(message => {
         ? views[state.view](state, actions)
         : 'not found'
     })
+  } else if (msgtype === 'song') {
+    Object.assign(state, msgdata[0])
+    m.redraw()
   }
 })

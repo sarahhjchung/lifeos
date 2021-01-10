@@ -2,6 +2,8 @@ import * as Noise from './lib/noise'
 import * as Beats from './lib/beats'
 import * as Spotify from './lib/spotify'
 
+let port = null
+
 const state = {
   view: 'idle',
   mode: 'none',
@@ -152,6 +154,14 @@ const actions = {
     state.songImage = song.item.album.images[0].url
     state.songProgress = Math.floor(song.progress_ms / 1000)
     state.songDuration = Math.floor(song.item.duration_ms / 1000)
+    port.postMessage(['song', {
+      songTitle: state.songTitle,
+      songAlbum: state.songAlbum,
+      songArtist: state.songArtist,
+      songImage: state.songImage,
+      songProgress: state.songProgress,
+      songDuration: state.songDuration
+    }])
   }
 }
 
@@ -165,7 +175,8 @@ function listen (message) {
 chrome.runtime.onInstalled.addListener(() => {
   // clear old alarm if existent (for debugging)
   chrome.alarms.clear()
-  chrome.runtime.onConnect.addListener(port => {
+  chrome.runtime.onConnect.addListener(p => {
+    port = p
     if (state.view === 'work' && !state.paused) {
       chrome.alarms.get(alarm => {
         const ticks = Math.floor((alarm.scheduledTime - Date.now()) / 1000)
