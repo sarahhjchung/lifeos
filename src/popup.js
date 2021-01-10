@@ -108,6 +108,8 @@ const actions = {
         Mood.playWater()
       } else if (state.moodType === 'forest') {
         Mood.playForest()
+      } else if (state.moodType === 'street') {
+        Mood.playStreet()
       }
     }
   },

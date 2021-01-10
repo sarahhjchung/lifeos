@@ -28,8 +28,17 @@ export function playForest () {
   forest.play()
 }
 
+const street = new Audio('../assets/music/street.mp3')
+
+export function playStreet () {
+  street.volume = volume
+  street.loop = true
+  street.play()
+}
+
 export function stop () {
   rain.pause()
   underWater.pause()
   forest.pause()
+  street.pause()
 }
