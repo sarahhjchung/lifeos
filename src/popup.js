@@ -52,6 +52,8 @@ const actions = {
       }
     } else if (state.mode === 'beats') {
       Beats.playBeats()
+    } else if (state.mode === 'spotify') {
+      Spotify.play()
     }
   },
 
@@ -61,6 +63,8 @@ const actions = {
       Noise.stop()
     } else if (state.mode === 'beats') {
       Beats.stopBeats()
+    } else if (state.mode === 'spotify') {
+      Spotify.pause()
     }
   },
 
@@ -73,7 +77,7 @@ const actions = {
     }
   },
 
-  selectMode (event) {
+  async selectMode (event) {
     state.mode = event.target.value
     actions.playAudio()
   },
@@ -93,6 +97,9 @@ const actions = {
 
   async openSpotify () {
     state.token = await Spotify.auth()
+    m.redraw() // force redraw
+    const data = await Spotify.getRecents()
+    window.alert(JSON.stringify(data))
   }
 }
 
