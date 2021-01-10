@@ -64,28 +64,7 @@ const actions = {
 
   selectMode (event) {
     state.mode = event.target.value
-<<<<<<< HEAD
     port.postMessage(['changeMode', state.mode])
-=======
-    if (state.mode === 'mood') {
-      state.moodType = 'rain'
-      Mood.setVolume(state.volume)
-    } else if (state.mode === 'noise') {
-      state.noiseColor = 'brown'
-      Noise.setVolume(state.volume)
-    } else if (state.mode === 'beats') {
-      state.beatsPattern = 'delta'
-      Beats.setPattern('delta')
-      Beats.setVolume(state.volume)
-    }
-    actions.playAudio()
-  },
-
-  selectMood (event) {
-    actions.stopAudio()
-    state.moodType = event.target.value
-    actions.playAudio()
->>>>>>> master
   },
 
   selectNoise (event) {

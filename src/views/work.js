@@ -10,14 +10,14 @@ export default (state, actions) => {
   return m('main', [
     m('h1', { class: 'title' }, 'Working...'),
     m('div', { class: 'circles' }, [
-      m('label', { for: 'timer-hours', class: 'circle -hours' }, [
-        m('h2', { id: 'circle-label' }, hours)
+      m('label', { class: 'circle -hours' }, [
+        m('h2', { class: 'circle-number' }, hours)
       ]),
-      m('label', { for: 'timer-minutes', class: 'circle -mins' }, [
-        m('h2', { id: 'circle-label' }, mins)
+      m('label', { class: 'circle -mins' }, [
+        m('h2', { class: 'circle-number' }, mins)
       ]),
-      m('label', { for: 'timer-seconds', class: 'circle -secs' }, [
-        m('h2', { id: 'circle-label' }, secs)
+      m('label', { class: 'circle -secs' }, [
+        m('h2', { class: 'circle-number' }, secs)
       ])
     ]),
     m('button', {
@@ -55,7 +55,6 @@ export default (state, actions) => {
       ? m('div', { class: 'beats-settings' }, [
           m('div', { class: 'pitch' }, [
             m('span', { class: 'material-icons-round music-note' }, 'music_note'),
-<<<<<<< HEAD
             m('span', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
             m('input', {
               class: 'pitch-slider',
@@ -65,10 +64,6 @@ export default (state, actions) => {
               value: state.beatsPitch,
               onchange: actions.changePitch
             })
-=======
-            m('h3', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
-            m('input', { class: 'pitch-slider', type: 'range', min: 50, max: 500, defaultValue: state.beatsPitch, onchange: actions.changeHz })
->>>>>>> master
           ]),
           m('select', { class: 'beats-mode', onchange: actions.selectBeats }, [
             m('option', { value: 'delta', selected: state.beatsPattern === 'delta' }, 'Delta'),
