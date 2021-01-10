@@ -61,6 +61,10 @@ const actions = {
     state.mode = event.target.value
   },
 
+  selectNoise (event) {
+    state.noiseColor = event.target.value
+  },
+
   openSpotify () {
     Spotify.open()
   }

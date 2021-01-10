@@ -22,6 +22,13 @@ export default (state, actions) =>
       m('option', { value: 'beats' }, 'Binaural beats'),
       m('option', { value: 'spotify' }, 'Your spotify playlist')
     ]),
+    state.mode === 'noise'
+      ? m('select', { onchange: actions.selectNoise }, [
+          m('option', { value: 'brown' }, 'Brown'),
+          m('option', { value: 'pink' }, 'Pink'),
+          m('option', { value: 'white' }, 'White')
+        ])
+      : null,
     state.mode === 'spotify'
       ? m('button', { onclick: actions.openSpotify }, 'Log in with Spotify')
       : null
