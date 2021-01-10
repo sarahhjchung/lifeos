@@ -10,7 +10,7 @@ export default (state, actions) =>
         m('input', { id: 'hours', class: 'circle-input', value: '00' })
       ]),
       m('label', { for: 'minutes', class: 'circle -minutes' }, [
-        m('input', { id: 'minutes', class: 'circle-input', value: '25' }, 25)
+        m('input', { id: 'minutes', class: 'circle-input', value: '25' })
       ]),
       m('label', { for: 'seconds', class: 'circle -seconds' }, [
         m('input', { id: 'seconds', class: 'circle-input', value: '00' })
