@@ -8,7 +8,7 @@ export default (state, actions) => {
   if (model.length === 5) model = '00:' + model
   const [hours, mins, secs] = model.split(':')
   return m('main', [
-    m('h1', { class: 'title' }, 'Working...'),
+    m('h1', { class: 'title' }, 'Focus!'),
     m('div', { class: 'circles' }, [
       m('label', { class: 'circle -hours' }, [
         m('h2', { class: 'circle-number' }, hours)

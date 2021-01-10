@@ -5,7 +5,7 @@ export default (state, actions) =>
   m('main', [
     m('img', { src: '../assets/icon-16x16.png', class: 'logo' }),
     m('h1', { class: 'title' }, 'LifeOS'),
-    m('h3', { class: 'message' }, 'How long would you like to work?'),
+    m('h3', { class: 'message' }, 'How long would you like to work today?'),
     m('div', { class: 'circles' }, [
       m('label', { for: 'hours', class: 'circle -hours' }, [
         m('input', { type: 'number', min: '0', max: '59', id: 'hours', class: 'circle-number', placeholder: '00' })
