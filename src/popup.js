@@ -48,6 +48,7 @@ const pages = {
       m('button', { onclick: () => toggle() },
         playing ? 'Pause' : 'Play'),
       m('button', { onclick: () => openSpotify() }, 'Log in with Spotify'),
+      m('button', { }, 'Play Binaural Beats'),
       m('button', {
         onclick: () => stop(),
         disabled: playing ? 'disabled' : null
