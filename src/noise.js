@@ -47,7 +47,7 @@ const pinkNoise = (function () {
       b4 = 0.55 * b4 + white * 0.50
       b5 = -0.8 * b5 - white * 0.02
       output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362
-      output[i] *= 0.08
+      output[i] *= amplitude
       b6 = white * 0.11
     }
   }
@@ -67,7 +67,7 @@ const brownNoise = (function () {
       const white = Math.random() * 2 - 1
       output[i] = (lastOut + (0.11 * white)) / 1.1
       lastOut = output[i]
-      output[i] *= 1
+      output[i] *= amplitude
     }
   }
   return brown
