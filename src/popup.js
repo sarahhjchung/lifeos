@@ -150,7 +150,7 @@ const actions = {
 
   selectMood (event) {
     actions.stopAudio()
-    state.mode = event.target.value
+    state.moodType = event.target.value
     actions.playAudio()
   },
 
