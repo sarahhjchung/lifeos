@@ -1,5 +1,6 @@
 import m from 'mithril'
 import { play as playNoise, stop as stopNoise } from './noise'
+import openSpotify from './spotify'
 
 let page = 'initial'
 let time = 0 // in seconds
@@ -46,6 +47,7 @@ const pages = {
       m('h1', 'Working...'),
       m('button', { onclick: () => toggle() },
         playing ? 'Pause' : 'Play'),
+      m('button', { onclick: () => openSpotify() }, 'Log in with Spotify'),
       m('button', {
         onclick: () => stop(),
         disabled: playing ? 'disabled' : null
