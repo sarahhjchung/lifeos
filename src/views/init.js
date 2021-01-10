@@ -8,8 +8,7 @@ export default (state, actions) =>
     m('div', { class: 'circles' }, [
       m('span', { class: 'circles-dark' }),
       m('span', { class: 'circles-medium' }),
-      m('span', { class: 'circles-light' })
-    ]), 
+      m('span', { class: 'circles-light' })]), 
     m('input', { class: 'input -hours' }),
     m('input', { class: 'input -minutes' }),
     m('input', { class: 'input -seconds' }),

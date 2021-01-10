@@ -3,7 +3,11 @@ import m from 'mithril'
 // Work view (previously "playing state")
 export default (state, actions) =>
   m('main', [
-    m('h1', 'Working...'),
+    m('h1', { class: 'title' }, 'Working...'),
+    m('div', { class: 'circles' }, [
+      m('span', { class: 'circles-dark' }),
+      m('span', { class: 'circles-medium' }),
+      m('span', { class: 'circles-light' })]), 
     m('button', {
       onclick: actions.stop,
       disabled: !state.paused ? 'disabled' : null
