@@ -20,3 +20,5 @@ export default (state, actions) =>
       m('button', { class: 'start button', onclick: actions.start }, 'Start >')
     ])
   ])
+
+

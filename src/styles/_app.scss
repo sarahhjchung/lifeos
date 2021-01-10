@@ -56,16 +56,24 @@ input::-webkit-inner-spin-button {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  opacity: 0.7;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0.7;
 }
+
+  .circle:hover input{
+    opacity: 0.5;
+  }
 
 .circle.-hours {
   background: $blue-5;
   opacity: 1;
 }
+
+  .circle.-hours input:hover {
+    opacity: 0.7;
+  }
 
 .circle.-minutes {
   background: $blue-3;
@@ -123,6 +131,7 @@ input::-webkit-inner-spin-button {
 
   .button:hover {
     opacity: 0.7;
+    cursor: pointer;
   }
 
 /*--- start state ---*/
@@ -133,6 +142,7 @@ input::-webkit-inner-spin-button {
   padding: 8px;
   border-radius: 24px;
   border: 2px solid $blue-2;
+  margin-top: 10px;
 }
 
 .beats-settings {
@@ -174,16 +184,18 @@ input::-webkit-inner-spin-button {
 
 .replay, .pause-play, .volume {
   display: inline-block;
+  padding-left: 5px;
 }
 
-.sound-on, .pause-play {
-  margin-left: 5px;
-}
+  .replay:hover, .pause-play:hover {
+    cursor: pointer;
+  }
 
 .volume-slider {
-  margin-left: 10px;
+  margin-left: 20px;
   margin-bottom: 3px;
   padding-bottom: 4px;
+  width: 100px;
 }
 
 .pitch {
@@ -231,4 +243,46 @@ input::-webkit-inner-spin-button {
 
   .spotify-log-in:hover {
     opacity: 0.7;
+    cursor: pointer;
   }
+
+// done state timer
+h2 {
+  color: white;
+}
+
+.done-buttons {
+  width: 220px;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 60px;
+}
+
+.snooze-button, .ok-button {
+  width: 47%;
+  color: white;
+  font-family: $font-content;
+  letter-spacing: 1px;
+  font-size: 12px;
+  border-radius: 24px;
+  font-weight: bold;
+  border: none;
+  padding: 8px;
+  box-shadow: 0px 7px 10px #97CADB;
+  outline: none;
+}
+
+.ok-button {
+  float: right;
+  background-color: $blue-3;
+}
+
+  .ok-button:hover, .snooze-button:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+.snooze-button {
+  float: left;
+  background-color: $blue-2;
+}
