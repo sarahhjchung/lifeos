@@ -13,6 +13,7 @@ body {
   margin: 20px;
   width: 280px;
   font-family: $font-content;
+  padding-bottom: 160px;
 }
 
 .title {
@@ -317,4 +318,18 @@ h2 {
 .snooze-button {
   float: left;
   background-color: $blue-2;
+}
+
+.bg {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.bg-wave {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }

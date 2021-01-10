@@ -19,5 +19,9 @@ export default (state, actions) =>
     m('div', { class: 'center-button' }, [
       m('button', { class: 'start button', onclick: actions.start },
         ['Start', m('span', { class: 'material-icons-round' }, 'arrow_right')])
+    ]),
+    m('div', { class: 'bg' }, [
+      m('img', { src: '../assets/wave-dark.svg', class: 'bg-wave -dark' }),
+      m('img', { src: '../assets/wave-light.svg', class: 'bg-wave -light' })
     ])
   ])

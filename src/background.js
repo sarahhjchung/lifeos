@@ -78,6 +78,11 @@ const actions = {
     state.heartbeat = null
   },
 
+  finish () {
+    state.done = true
+    port.postMessage(['done'])
+  },
+
   playAudio () {
     if (state.mode === 'noise') {
       if (state.noiseColor === 'white') {
@@ -259,5 +264,9 @@ chrome.runtime.onInstalled.addListener(() => {
         actions.clearHeartbeat()
       })
     }
+  })
+
+  chrome.alarms.onAlarm.addListener(alarm => {
+    port.postMessage(['done'])
   })
 })

@@ -124,6 +124,10 @@ export default (state, actions) => {
               ])
             ])
           : m('button', { class: 'spotify-log-in', onclick: actions.openSpotify }, 'Log in with Spotify')
-      : null
+      : null,
+    m('div', { class: 'bg' }, [
+      m('img', { src: '../assets/wave-dark.svg', class: 'bg-wave -dark' }),
+      m('img', { src: '../assets/wave-light.svg', class: 'bg-wave -light' })
+    ])
   ])
 }
