@@ -78,6 +78,36 @@ export function pause () {
   })
 }
 
+export function prev () {
+  return new Promise((resolve, reject) => {
+    if (!token) {
+      return reject(new Error('Failed to go to previous song:' +
+        ' User is not authenticated'))
+    }
+    m.request({
+      method: 'POST',
+      url: 'https://api.spotify.com/v1/me/player/previous',
+      headers: { Authorization: 'Bearer ' + token }
+    }).then(data => resolve(data))
+      .catch(err => reject(new Error(JSON.stringify(err))))
+  })
+}
+
+export function next () {
+  return new Promise((resolve, reject) => {
+    if (!token) {
+      return reject(new Error('Failed to go to next song:' +
+        ' User is not authenticated'))
+    }
+    m.request({
+      method: 'POST',
+      url: 'https://api.spotify.com/v1/me/player/next',
+      headers: { Authorization: 'Bearer ' + token }
+    }).then(data => resolve(data))
+      .catch(err => reject(new Error(JSON.stringify(err))))
+  })
+}
+
 export function getSong () {
   return new Promise((resolve, reject) => {
     if (!token) {

@@ -104,8 +104,8 @@ export default (state, actions) => {
                   ])
                 ]),
                 m('div', { class: 'widget-rhs widget-buttons' }, [
-                  m('button', { class: 'material-icons-round' }, 'skip_previous'),
-                  m('button', { class: 'material-icons-round' }, 'skip_next')
+                  m('button', { class: 'widget-prev material-icons-round', onclick: actions.prevSong }, 'skip_previous'),
+                  m('button', { class: 'widget-next material-icons-round', onclick: actions.nextSong }, 'skip_next')
                 ])
               ]),
               m('div', { class: 'widget-seek' }, [

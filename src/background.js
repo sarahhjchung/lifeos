@@ -194,6 +194,24 @@ const actions = {
     }
   },
 
+  async prevSong () {
+    try {
+      await Spotify.prev()
+      await actions.updateSong()
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
+  async nextSong () {
+    try {
+      await Spotify.next()
+      await actions.updateSong()
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
   async updateSong () {
     const player = await Spotify.getPlayback()
     if (!player || !player.item) return
