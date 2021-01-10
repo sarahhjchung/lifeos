@@ -75,6 +75,13 @@ body {
   color: rgba(white, 0.75);
 }
 
+.input {
+  outline: solid;
+  width: 20px;
+  display: inline-block;
+  margin: 5px;
+}
+
 .button {
   background-color: $blue-3;
   font-family: $font-content;
@@ -88,6 +95,7 @@ body {
   padding: 8px;
   box-shadow: 0px 7px 10px #97CADB;
   outline: none;
+  margin-bottom: 20px;
 }
 
   .button:hover{
