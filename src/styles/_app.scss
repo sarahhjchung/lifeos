@@ -16,6 +16,10 @@ body {
   padding-bottom: 160px;
 }
 
+main {
+  text-align: center;
+}
+
 .title {
   font-family: $font-display;
   color: $charcoal;
@@ -31,6 +35,7 @@ body {
   font-family: $font-content;
   color: $blue-3;
   text-align: center;
+  line-height: 1.25;
   font-weight: lighter;
   width: 60%;
   margin: auto;
@@ -41,6 +46,11 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.logo + .title {
+  padding-top: 0;
+  margin-top: -16px;
 }
 
 /*--- Timer ---*/
@@ -278,10 +288,15 @@ select {
   margin-top: 10px;
 }
 
-  .spotify-log-in:hover {
-    opacity: 0.7;
-    cursor: pointer;
-  }
+.spotify-log-in:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.sound-buttons.replay:disabled {
+  color: $blue-2;
+  cursor: default;
+}
 
 // done state timer
 h2 {
@@ -314,10 +329,10 @@ h2 {
   background-color: $blue-3;
 }
 
-  .ok-button:hover, .snooze-button:hover {
-    opacity: 0.7;
-    cursor: pointer;
-  }
+.ok-button:hover, .snooze-button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
 
 .snooze-button {
   float: left;
