@@ -17,11 +17,11 @@ export default (state, actions) =>
       ])
     ]),
     m('button', {
-      class: 'sound-buttons',
+      class: 'sound-buttons replay',
       onclick: actions.stop,
       disabled: !state.paused ? 'disabled' : null
     }, m('span', { class: 'material-icons-round' }, 'replay')),
-    m('button', { class: 'sound-buttons', onclick: actions.toggleAudio },
+    m('button', { class: 'sound-buttons pause-play', onclick: actions.toggleAudio },
       state.paused
         ? m('span', { class: 'material-icons-round' }, 'play_arrow')
         : m('span', { class: 'material-icons-round' }, 'pause')),

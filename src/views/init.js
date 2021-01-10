@@ -17,5 +17,5 @@ export default (state, actions) =>
       ])
     ]),
     m('div', { class: 'center-button' },[
-    m('button', { class: 'start button', onclick: actions.start }, 'Start >')])
+      m('button', { class: 'start button', onclick: actions.start }, 'Start >')])
   ])
