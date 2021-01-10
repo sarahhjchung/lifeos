@@ -51,6 +51,11 @@ const actions = {
     } else {
       actions.pause()
     }
+  },
+  stop () {
+    state.view = 'idle'
+    state.ticks = 0
+    port.postMessage(['stop'])
   }
 }
 

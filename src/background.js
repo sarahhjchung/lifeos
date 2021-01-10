@@ -40,6 +40,7 @@ const actions = {
 
   stop () {
     state.view = 'idle'
+    chrome.alarms.clear()
   },
 
   playAudio () {
