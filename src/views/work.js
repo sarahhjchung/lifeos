@@ -14,7 +14,7 @@ export default (state, actions) =>
     }, m('span', { class: 'material-icons-round' }, 'replay')),
     m('button', { onclick: actions.toggleAudio },
       state.paused
-        ? m('span', { class: 'material-icons-round' }, 'play')
+        ? m('span', { class: 'material-icons-round' }, 'play_arrow')
         : m('span', { class: 'material-icons-round' }, 'pause')),
     m('div', { class: 'volume' }, [
       m('span', { class: 'material-icons-round' }, 'volume_up'),
@@ -52,16 +52,18 @@ export default (state, actions) =>
           ? m('button', { onclick: actions.openSpotify }, 'Log in with Spotify')
           : m('div', { class: 'spotify-widget' }, [
             m('div', { class: 'widget-head' }, [
-              m('div', { class: 'widget-image' }),
-              m('div', { class: 'widget-data' }, [
-                m('div', { class: 'song-name' }, state.songName),
-                m('div', { class: 'song-meta' },
-                  m('span', { class: 'song-artist' }, state.songArtist),
-                  ' - ',
-                  m('span', { class: 'song-album' }, state.songAlbum)
-                )
+              m('div', { class: 'widget-lhs' }, [
+                m('div', { class: 'widget-image' }),
+                m('div', { class: 'widget-data' }, [
+                  m('div', { class: 'song-title' }, state.songTitle),
+                  m('span', { class: 'song-meta' },
+                    m('span', { class: 'song-artist' }, state.songArtist),
+                    ' - ',
+                    m('span', { class: 'song-album' }, state.songAlbum)
+                  )
+                ])
               ]),
-              m('div', { class: 'widget-controls' }, [
+              m('div', { class: 'widget-rhs widget-buttons' }, [
                 m('button', { class: 'material-icons-round' }, 'skip_previous'),
                 m('button', { class: 'material-icons-round' }, 'skip_next')
               ])
