@@ -7,18 +7,16 @@ export default (state, actions) =>
     m('h3', { class: 'message' }, 'How long would you like to work?'),
     m('div', { class: 'circles' }, [
       m('label', { for: 'hours', class: 'circle -hours' }, [
-        m('input', { type: 'number', min: '0', max: '59', id: 'hours', class: 'circle-input', placeholder: '00' })
+        m('input', { type: 'number', min: '0', max: '59', id: 'hours', class: 'circle-number', placeholder: '00' })
       ]),
-      m('label', { for: 'minutes', class: 'circle -minutes' }, [
-        m('input', { type: 'number', min: '0', max: '59', id: 'minutes', class: 'circle-input', placeholder: '00' })
+      m('label', { for: 'mins', class: 'circle -mins' }, [
+        m('input', { type: 'number', min: '0', max: '59', id: 'mins', class: 'circle-number', placeholder: '00', value: '25' })
       ]),
-      m('label', { for: 'seconds', class: 'circle -seconds' }, [
-        m('input', { type: 'number', min: '0', max: '59', id: 'seconds', class: 'circle-input', placeholder: '00' })
+      m('label', { for: 'secs', class: 'circle -secs' }, [
+        m('input', { type: 'number', min: '0', max: '59', id: 'secs', class: 'circle-number', placeholder: '00' })
       ])
     ]),
     m('div', { class: 'center-button' }, [
       m('button', { class: 'start button', onclick: actions.start }, 'Start >')
     ])
   ])
-
-

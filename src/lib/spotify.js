@@ -23,6 +23,10 @@ function getURL (endpoint, clientId, scopes) {
     '&show_dialog=true'
 }
 
+export function use (t) {
+  token = t
+}
+
 export function auth () {
   return new Promise((resolve, reject) => {
     const url = getURL(endpoint, clientId, scopes)
@@ -82,6 +86,20 @@ export function getSong () {
     }
     m.request({
       url: 'https://api.spotify.com/v1/me/player/currently-playing',
+      headers: { Authorization: 'Bearer ' + token }
+    }).then(data => resolve(data))
+      .catch(err => reject(new Error(JSON.stringify(err))))
+  })
+}
+
+export function getPlayback () {
+  return new Promise((resolve, reject) => {
+    if (!token) {
+      return reject(new Error('Failed to retrieve player info:' +
+        ' User is not authenticated'))
+    }
+    m.request({
+      url: 'https://api.spotify.com/v1/me/player',
       headers: { Authorization: 'Bearer ' + token }
     }).then(data => resolve(data))
       .catch(err => reject(new Error(JSON.stringify(err))))

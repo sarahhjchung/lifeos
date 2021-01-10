@@ -20,6 +20,7 @@ css:
 	sass src/style.scss dist/style.css
 
 js:
+	esbuild src/background.js --bundle --sourcemap --outfile=dist/background.js
 	esbuild src/popup.js --bundle --sourcemap --outfile=dist/popup.js
 
 json:
