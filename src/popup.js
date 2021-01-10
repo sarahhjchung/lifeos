@@ -68,6 +68,7 @@ const actions = {
   },
 
   selectMode (event) {
+    state.paused = false
     state.mode = event.target.value
     port.postMessage(['changeMode', state.mode])
   },
