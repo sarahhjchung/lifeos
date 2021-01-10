@@ -8,6 +8,7 @@ const state = {
   view: 'idle',
   mode: 'none',
   timer: 0,
+  heartbeat: null,
   alarm: null,
   paused: true,
   volume: 50,
@@ -33,12 +34,14 @@ const actions = {
   play () {
     state.paused = false
     actions.playAudio()
+    actions.queueHeartbeat()
     chrome.alarms.create({ when: Date.now() + state.timer * 1000 })
   },
 
   pause () {
     state.paused = true
     actions.stopAudio()
+    actions.clearHeartbeat()
     chrome.alarms.get(alarm => {
       const ticks = Math.floor((alarm.scheduledTime - Date.now()) / 1000)
       state.timer = ticks
@@ -49,6 +52,28 @@ const actions = {
   stop () {
     state.view = 'idle'
     chrome.alarms.clear()
+  },
+
+  pulse () {
+    if (state.token) actions.updateSong()
+    try {
+      port.postMessage(['pulse', state.song])
+      state.heartbeat = null
+      actions.queueHeartbeat()
+    } catch (err) {
+      actions.clearHeartbeat()
+    }
+  },
+
+  queueHeartbeat () {
+    if (state.heartbeat) return
+    state.heartbeat = setTimeout(actions.pulse, 1000)
+  },
+
+  clearHeartbeat () {
+    if (!state.heartbeat) return
+    clearTimeout(state.heartbeat)
+    state.heartbeat = null
   },
 
   playAudio () {
@@ -156,14 +181,6 @@ const actions = {
       progress: Math.floor(player.progress_ms / 1000),
       duration: Math.floor(player.item.duration_ms / 1000)
     }
-    port.postMessage(['song', state.song])
-  }
-}
-
-function listen (message) {
-  const [msgtype, ...msgdata] = message
-  if (actions[msgtype]) {
-    actions[msgtype](...msgdata)
   }
 }
 
@@ -172,16 +189,32 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.alarms.clear()
   chrome.runtime.onConnect.addListener(p => {
     port = p
+
     if (state.view === 'work' && !state.paused) {
       chrome.alarms.get(alarm => {
         const ticks = Math.floor((alarm.scheduledTime - Date.now()) / 1000)
         state.timer = ticks
-        port.postMessage(['state', state])
-        port.onMessage.addListener(listen)
+        cb()
       })
     } else {
+      cb()
+    }
+
+    function cb () {
+      actions.queueHeartbeat()
+
       port.postMessage(['state', state])
-      port.onMessage.addListener(listen)
+
+      port.onMessage.addListener(message => {
+        const [msgtype, ...msgdata] = message
+        if (actions[msgtype]) {
+          actions[msgtype](...msgdata)
+        }
+      })
+
+      port.onDisconnect.addListener(() => {
+        actions.clearHeartbeat()
+      })
     }
   })
 })

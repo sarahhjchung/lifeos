@@ -17,37 +17,23 @@ const actions = {
     state.view = 'work'
     state.timer = ticks
     state.paused = false
-    actions.queueTick()
   },
 
-  tick () {
+  pulse (song) {
     if (--state.timer < 0) {
       state.timer = 0
     }
+    state.song = song
     m.redraw()
-    state.alarm = null
-    actions.queueTick()
-  },
-
-  queueTick () {
-    // ticks should be received from bg process
-  },
-
-  clearTick () {
-    if (!state.alarm) return
-    clearTimeout(actions.tick)
-    actions.tick = null
   },
 
   play () {
     state.paused = false
-    actions.queueTick()
     port.postMessage(['play'])
   },
 
   pause () {
     state.paused = true
-    actions.clearTick()
     port.postMessage(['pause'])
   },
 
@@ -103,16 +89,12 @@ port.onMessage.addListener(message => {
   const [msgtype, ...msgdata] = message
   if (msgtype === 'state') {
     state = msgdata[0]
-    if (state.timer) {
-      actions.queueTick()
-    }
     m.mount(document.body, {
       view: () => views[state.view]
         ? views[state.view](state, actions)
         : 'not found'
     })
-  } else if (msgtype === 'song') {
-    state.song = msgdata[0]
-    m.redraw()
+  } else if (msgtype === 'pulse') {
+    actions.pulse(msgdata[0])
   }
 })
