@@ -7,13 +7,13 @@ export default (state, actions) =>
     m('h3', { class: 'message' }, 'How long would you like to work?'),
     m('div', { class: 'circles' }, [
       m('label', { for: 'hours', class: 'circle -hours' }, [
-        m('input', { id: 'hours', class: 'circle-input', value: '00' })
+        m('input', { type: 'number', min: '0', max: '59', id: 'hours', class: 'circle-input', placeholder: '00' })
       ]),
       m('label', { for: 'minutes', class: 'circle -minutes' }, [
-        m('input', { id: 'minutes', class: 'circle-input', value: '25' })
+        m('input', { type: 'number', min: '0', max: '59', id: 'minutes', class: 'circle-input', placeholder: '00' })
       ]),
       m('label', { for: 'seconds', class: 'circle -seconds' }, [
-        m('input', { id: 'seconds', class: 'circle-input', value: '00' })
+        m('input', { type: 'number', min: '0', max: '59', id: 'seconds', class: 'circle-input', placeholder: '00' })
       ])
     ]),
     m('div', { class: 'center-button' }, [

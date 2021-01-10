@@ -36,6 +36,12 @@ body {
   padding-top: 0;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /*--- Timer ---*/
 
 .circles {
@@ -121,34 +127,45 @@ body {
 
 /*--- start state ---*/
 
-.mode-wrapper, .beats-settings {
+.mode-wrapper {
+  width: 240px;
+  margin: auto;
+  padding: 8px;
+  border-radius: 24px;
+  border: 2px solid $blue-2;
+}
+
+.beats-settings {
   width: 240px;
   margin: auto;
   padding-top: 10px;
-  padding-bottom: 10px;
-  border-radius: 24px;
 }
 
 .mode {
-  outline: solid;
-  outline-width: 2px;
-  outline-color: $blue-2;
+  outline: none;
   width: 100%;
-  padding: 8px;
+  // padding: 8px;
+}
+
+.music-note {
+  z-index: -10;
 }
 
 .noise-mode {
-  outline: solid;
-  outline-width: 2px;
-  outline-color: $blue-2;
   width: 240px;
-  margin-left: 20px;
+  margin: 10px 20px;
   padding: 8px;
+  border-radius: 24px;
+  border: 2px solid $blue-2;
+  outline: none;
 }
 
 .sound-buttons, .material-icons-round {
-  background-color: white;
   outline: none;
+}
+
+.sound-buttons {
+  background-color: white;
 }
 
 .replay {
@@ -171,19 +188,18 @@ body {
 
 .pitch {
   display: inline-block;
-  outline: solid;
-  outline-width: 2px;
-  outline-color: $blue-2;
+  border: 2px solid $blue-2;
   padding: 3px;
+  border-radius: 24px;
 }
 
 .beats-mode {
-  outline: solid;
-  outline-width: 2px;
-  outline-color: $blue-2;
-  width: 70px;
+  width: 80px;
   padding: 8px;
   float: right;
+  border-radius: 24px;
+  border: 2px solid $blue-2;
+  outline: none;
 }
 
 .pitch-hz {
@@ -210,6 +226,7 @@ body {
   box-shadow: 0px 7px 10px #94e9b1;
   outline: none;
   margin-left: 20px;
+  margin-top: 10px;
 }
 
   .spotify-log-in:hover {
