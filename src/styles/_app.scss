@@ -136,7 +136,7 @@ input::-webkit-inner-spin-button {
 
 /*--- start state ---*/
 
-.mode-wrapper {
+.mode-wrapper, .noise-div {
   width: 240px;
   margin: auto;
   padding: 8px;
@@ -151,7 +151,7 @@ input::-webkit-inner-spin-button {
   padding-top: 10px;
 }
 
-.mode {
+.mode, .noise-mode {
   outline: none;
   width: 100%;
   // padding: 8px;
@@ -159,15 +159,6 @@ input::-webkit-inner-spin-button {
 
 .music-note {
   z-index: -10;
-}
-
-.noise-mode {
-  width: 240px;
-  margin: 10px 20px;
-  padding: 8px;
-  border-radius: 24px;
-  border: 2px solid $blue-2;
-  outline: none;
 }
 
 .sound-buttons, .material-icons-round {

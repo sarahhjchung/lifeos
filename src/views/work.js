@@ -1,21 +1,6 @@
 import m from 'mithril'
 import { fromSeconds as hhmmss } from '../lib/hummus'
 
-// const hr = 'hours'
-// const min = 'minutes'
-// const sec = 'seconds'
-// var x = setInterval(function () {
-
-//   while(hr + min + sec != 0) {
-//      if(sec == 0 && min !=0) {
-//        min = min - 1
-//        sec = 59
-//      }
-//      if()
-// }
-
-// }, 1000);
-
 // Work view (previously "playing state")
 export default (state, actions) =>
   m('main', [
@@ -54,19 +39,21 @@ export default (state, actions) =>
       ])
     ),
     state.mode === 'mood'
-      ? m('select', { class: 'noise-mode', onchange: actions.selectMood }, [
-          m('option', { class: 'noise-type', value: 'rain' }, 'Rain'),
-          m('option', { class: 'noise-type', value: 'water' }, 'Under Water'),
-          m('option', { class: 'noise-type', value: 'forest' }, 'Forest'),
-          m('option', { class: 'noise-type', value: 'street' }, 'Street')
-        ])
+      ? m('div', { class: 'noise-div' }, [
+          m('select', { class: 'noise-mode', onchange: actions.selectMood }, [
+            m('option', { class: 'noise-type', value: 'rain' }, 'Rain'),
+            m('option', { class: 'noise-type', value: 'water' }, 'Underwater'),
+            m('option', { class: 'noise-type', value: 'forest' }, 'Forest'),
+            m('option', { class: 'noise-type', value: 'street' }, 'Street')
+          ])])
       : null,
     state.mode === 'noise'
-      ? m('select', { class: 'noise-mode', onchange: actions.selectNoise }, [
-          m('option', { class: 'noise-type', value: 'brown' }, 'Brown'),
-          m('option', { class: 'noise-type', value: 'pink' }, 'Pink'),
-          m('option', { class: 'noise-type', value: 'white' }, 'White')
-        ])
+      ? m('div', { class: 'noise-div' }, [
+          m('select', { class: 'noise-mode', onchange: actions.selectNoise }, [
+            m('option', { class: 'noise-type', value: 'brown' }, 'Brown'),
+            m('option', { class: 'noise-type', value: 'pink' }, 'Pink'),
+            m('option', { class: 'noise-type', value: 'white' }, 'White')
+          ])])
       : null,
     state.mode === 'beats'
       ? m('div', { class: 'beats-settings' }, [
