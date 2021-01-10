@@ -153,6 +153,14 @@ const actions = {
       actions.stopAudio()
     }
     state.mode = event.target.value
+    if (state.mode === 'mood') {
+      state.moodType = 'rain'
+    } else if (state.mode === 'noise') {
+      state.noiseColor = 'brown'
+    } else if (state.mode === 'beats') {
+      state.beatsPattern = 'delta'
+      Beats.setPattern('delta')
+    }
     actions.playAudio()
   },
 
