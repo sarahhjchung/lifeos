@@ -14,7 +14,7 @@ const state = {
   mode: 'none',
   timer: 1500, // in seconds
   timeout: null,
-  paused: true,
+  paused: false,
   volume: 50,
   moodType: 'rain',
   noiseColor: 'brown',
@@ -102,7 +102,10 @@ const actions = {
     } else if (state.mode === 'spotify' && state.token) {
       actions.playSpotify()
     } else if (state.mode === 'mood') {
-      Mood.playRain()
+      if (state.moodType === 'rain') {
+        Mood.playRain()
+      } else if (state.moodType === 'water') {
+        Mood.playWater()
     }
   },
 

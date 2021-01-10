@@ -12,6 +12,15 @@ export function playRain () {
   rain.play()
 }
 
+const underWater = new Audio('../assets/music/underWater.mp3')
+
+export function playWater () {
+  underWater.volume = volume
+  underWater.loop = true
+  underWater.play()
+}
+
 export function stop () {
   rain.pause()
+  underWater.pause()
 }
