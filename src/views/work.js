@@ -29,6 +29,20 @@ export default (state, actions) =>
           m('option', { value: 'white' }, 'White')
         ])
       : null,
+    state.mode === 'beats'
+      ? m('div', [
+          m('div', { class: 'pitch' }, [
+            m('span', { class: 'material-icons-round' }, 'music_note'),
+            m('span', { class: 'pitch-hz' }, state.beatsPitch + 'Hz'),
+            m('input', { type: 'range', min: 5, max: 1000 })
+          ]),
+          m('select', { onchange: actions.selectBeats }, [
+            m('option', { value: 'brown' }, 'Brown'),
+            m('option', { value: 'pink' }, 'Pink'),
+            m('option', { value: 'white' }, 'White')
+          ])
+        ])
+      : null,
     state.mode === 'spotify'
       ? m('button', { onclick: actions.openSpotify }, 'Log in with Spotify')
       : null
