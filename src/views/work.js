@@ -44,6 +44,31 @@ export default (state, actions) =>
         ])
       : null,
     state.mode === 'spotify'
-      ? m('button', { onclick: actions.openSpotify }, 'Log in with Spotify')
+      ? state.token
+          ? m('button', { onclick: actions.openSpotify }, 'Log in with Spotify')
+          : m('div', { class: 'spotify-widget' }, [
+            m('div', { class: 'widget-head' }, [
+              m('div', { class: 'widget-image' }),
+              m('div', { class: 'widget-data' }, [
+                m('div', { class: 'song-name' }, state.songName),
+                m('div', { class: 'song-meta' },
+                  m('span', { class: 'song-artist' }, state.songArtist),
+                  ' - ',
+                  m('span', { class: 'song-album' }, state.songAlbum)
+                )
+              ]),
+              m('div', { class: 'widget-controls' }, [
+                m('button', { class: 'material-icons-round' }, 'skip_previous'),
+                m('button', { class: 'material-icons-round' }, 'skip_next')
+              ])
+            ]),
+            m('div', { class: 'widget-seek' }, [
+              m('input', { class: 'widget-slider', type: 'range' }),
+              m('div', { class: 'widget-times' }, [
+                m('div', { class: 'song-position' }, state.songPosition),
+                m('div', { class: 'song-length' }, state.songLength)
+              ])
+            ])
+          ])
       : null
   ])

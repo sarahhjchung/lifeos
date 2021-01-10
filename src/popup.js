@@ -14,7 +14,12 @@ const state = {
   paused: true,
   noiseColor: 'white',
   beatsPitch: 200,
-  beatsPattern: 'beta'
+  beatsPattern: 'beta',
+  songTitle: 'Song Name',
+  songArtist: 'Artist',
+  songAlbum: 'Album',
+  songPosition: 0,
+  songLength: 0
 }
 
 const actions = {
