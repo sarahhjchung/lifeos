@@ -9,16 +9,14 @@ export default (state, actions) =>
       m('label', { for: 'hours', class: 'circle -hours' }, [
         m('input', { type: 'number', min: '0', max: '59', id: 'hours', class: 'circle-input', placeholder: '00' })
       ]),
-      m('label', { for: 'minutes', class: 'circle -minutes' }, [
-        m('input', { type: 'number', min: '0', max: '59', id: 'minutes', class: 'circle-input', placeholder: '00' })
+      m('label', { for: 'mins', class: 'circle -mins' }, [
+        m('input', { type: 'number', min: '0', max: '59', id: 'mins', class: 'circle-input', placeholder: '00', value: '30' })
       ]),
-      m('label', { for: 'seconds', class: 'circle -seconds' }, [
-        m('input', { type: 'number', min: '0', max: '59', id: 'seconds', class: 'circle-input', placeholder: '00' })
+      m('label', { for: 'secs', class: 'circle -secs' }, [
+        m('input', { type: 'number', min: '0', max: '59', id: 'secs', class: 'circle-input', placeholder: '00' })
       ])
     ]),
     m('div', { class: 'center-button' }, [
       m('button', { class: 'start button', onclick: actions.start }, 'Start >')
     ])
   ])
-
-

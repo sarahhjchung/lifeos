@@ -1,11 +1,16 @@
 {
   "name": "LifeOS",
   "version": "0.1",
-  "description": "Build and Extension!",
+  "description": "A Chrome extension for facilitating productivity with Pomodoro timing and audio integrations",
   "permissions": [
     "activeTab",
-    "identity"
+    "identity",
+    "alarms"
   ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {

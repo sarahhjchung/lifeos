@@ -1,158 +1,72 @@
 import m from 'mithril'
-import * as Noise from './lib/noise'
 import * as Spotify from './lib/spotify'
-import * as Beats from './lib/beats'
-import * as Mood from './lib/mood'
-import init from './views/init'
+import { toSeconds } from './lib/hummus'
+import idle from './views/idle'
 import work from './views/work'
 import done from './views/done'
 
-const views = { init, work, done }
-
-const state = {
-  view: 'init',
-  mode: 'none',
-  timer: 1500, // in seconds
-  timeout: null,
-  paused: true,
-  volume: 50,
-  moodType: 'rain',
-  noiseColor: 'brown',
-  beatsPitch: 200,
-  beatsPattern: 'alpha',
-  songTitle: 'Song Title',
-  songArtist: 'Artist',
-  songAlbum: 'Album',
-  songImage: null,
-  songProgress: 0,
-  songDuration: 0
-}
-
+const views = { idle, work, done }
+const port = chrome.runtime.connect({ name: 'popup' })
 const actions = {
   start () {
+    const hours = document.getElementById('hours').value || 0
+    const mins = document.getElementById('mins').value || 0
+    const secs = document.getElementById('secs').value || 0
+    const ticks = toSeconds(hours + ':' + mins + ':' + secs)
+    port.postMessage(['start', ticks])
     state.view = 'work'
-    actions.play()
+    state.timer = ticks
+    state.paused = false
+  },
+
+  pulse (song) {
+    if (--state.timer < 0) {
+      state.timer = 0
+    }
+    state.song = song
+    m.redraw()
   },
 
   play () {
     state.paused = false
-    actions.playAudio()
+    port.postMessage(['play'])
+  },
+
+  pause () {
+    state.paused = true
+    port.postMessage(['pause'])
+  },
+
+  toggle () {
+    if (state.paused) {
+      actions.play()
+    } else {
+      actions.pause()
+    }
   },
 
   stop () {
-    state.view = 'init'
-    state.paused = true
-    actions.stopAudio()
-  },
-
-  update () {
-    if (--state.timer < 0) {
-      state.timer = 0
-    }
-
-    // HACK: using songImage to determine if song exists
-    // TODO: song as substate e.g. state.song
-    if (state.songImage && ++state.songProgress > state.songDuration) {
-      state.songProgress = state.songDuration
-    }
-
-    console.log(state.songProgress)
-    m.redraw()
-  },
-
-  queueUpdate () {
-    state.timeout = setTimeout(actions.update, 1000)
-  },
-
-  cancelUpdate () {
-    // TODO: higher precision
-    if (state.timeout) {
-      clearTimeout(state.timeout)
-      state.timeout = null
-    }
+    state.view = 'idle'
+    state.timer = 0
+    port.postMessage(['stop'])
   },
 
   changeVolume (event) {
     state.volume = event.target.value
-    if (state.mode === 'noise') {
-      Noise.setVolume(event.target.value)
-    } else if (state.mode === 'beats') {
-      Beats.setVolume(event.target.value)
-    } else if (state.mode === 'mood') {
-      Mood.setVolume(event.target.value)
-    }
-    actions.stopAudio()
-    actions.playAudio()
+    port.postMessage(['changeVolume', state.volume])
   },
 
-  playAudio () {
-    state.paused = false
-    actions.queueUpdate()
-
-    if (state.mode === 'noise') {
-      if (state.noiseColor === 'white') {
-        Noise.playWhite()
-      } else if (state.noiseColor === 'pink') {
-        Noise.playPink()
-      } else if (state.noiseColor === 'brown') {
-        Noise.playBrown()
-      }
-    } else if (state.mode === 'beats') {
-      Beats.playBeats()
-    } else if (state.mode === 'spotify' && state.token) {
-      actions.playSpotify()
-    } else if (state.mode === 'mood') {
-      if (state.moodType === 'rain') {
-        Mood.playRain()
-      } else if (state.moodType === 'water') {
-        Mood.playWater()
-      } else if (state.moodType === 'forest') {
-        Mood.playForest()
-      } else if (state.moodType === 'street') {
-        Mood.playStreet()
-      }
-    }
+  changePitch (event) {
+    state.beatsPitch = event.target.value
+    console.log(state.beatsPitch)
+    port.postMessage(['changePitch', state.beatsPitch])
   },
 
-  async playSpotify (params) {
-    try {
-      await Spotify.play(params)
-      await actions.updateSong()
-    } catch (err) {
-      console.log(err)
-    }
-  },
-
-  stopAudio () {
-    state.paused = true
-    actions.cancelUpdate()
-    if (state.mode === 'noise') {
-      Noise.stop()
-    } else if (state.mode === 'beats') {
-      Beats.stopBeats()
-    } else if (state.mode === 'spotify' && state.token) {
-      Spotify.pause()
-    } else if (state.mode === 'mood') {
-      Mood.stop()
-    }
-  },
-
-  toggleAudio () {
-    state.paused = !state.paused
-    if (state.paused) {
-      actions.stopAudio()
-    } else {
-      actions.playAudio()
-    }
-  },
-
-  async selectMode (event) {
-    if (state.mode !== 'beats') {
-      actions.stopAudio()
-    } else if (!state.paused) {
-      actions.stopAudio()
-    }
+  selectMode (event) {
     state.mode = event.target.value
+<<<<<<< HEAD
+    port.postMessage(['changeMode', state.mode])
+=======
     if (state.mode === 'mood') {
       state.moodType = 'rain'
       Mood.setVolume(state.volume)
@@ -171,60 +85,42 @@ const actions = {
     actions.stopAudio()
     state.moodType = event.target.value
     actions.playAudio()
+>>>>>>> master
   },
 
   selectNoise (event) {
-    actions.stopAudio()
     state.noiseColor = event.target.value
-    actions.playAudio()
+    port.postMessage(['changeNoise', state.noiseColor])
   },
 
   selectBeats (event) {
     state.beatsPattern = event.target.value
-    Beats.setPattern(event.target.value)
-    actions.play()
+    port.postMessage(['changeBeats', state.beatsPattern])
   },
 
-  changeHz (event) {
-    state.beatsPitch = event.target.value
-    Beats.setHz(event.target.value)
-    actions.stopAudio()
-    actions.playAudio()
+  selectAmbience (event) {
+    state.ambience = event.target.value
+    port.postMessage(['changeAmbience', state.ambience])
   },
 
   async openSpotify () {
     state.token = await Spotify.auth()
     m.redraw() // force redraw
-
-    const data = await Spotify.getRecents()
-    console.log(data)
-
-    const item = data.items.find(item => item.context && item.context.uri)
-    if (!item) {
-      return
-    }
-
-    await actions.playSpotify({ context_uri: item.context.uri })
-  },
-
-  async updateSong () {
-    const song = await Spotify.getSong()
-    if (song && song.item) {
-      state.songTitle = song.item.name
-      state.songAlbum = song.item.album.name
-      state.songArtist = song.item.artists
-        .map(artist => artist.name).join(', ')
-      state.songImage = song.item.album.images[0].url
-      state.songProgress = Math.floor(song.progress_ms / 1000)
-      state.songDuration = Math.floor(song.item.duration_ms / 1000)
-    }
+    port.postMessage(['authSpotify', state.token])
   }
 }
 
-m.mount(document.body, {
-  view: () => views[state.view]
-    ? views[state.view](state, actions)
-    : 'not found'
+let state = null
+port.onMessage.addListener(message => {
+  const [msgtype, ...msgdata] = message
+  if (msgtype === 'state') {
+    state = msgdata[0]
+    m.mount(document.body, {
+      view: () => views[state.view]
+        ? views[state.view](state, actions)
+        : 'not found'
+    })
+  } else if (msgtype === 'pulse') {
+    actions.pulse(msgdata[0])
+  }
 })
-
-actions.queueUpdate()
