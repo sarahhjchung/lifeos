@@ -55,9 +55,12 @@ for (let i = 0; i < pinkBufferSize; i++) {
 export function playPink () {
   if (noise) return
   noise = context.createBufferSource()
+  const gainNode = context.createGain()
   noise.buffer = pinkBuffer
   noise.loop = true
-  noise.connect(context.destination)
+  noise.connect(gainNode)
+  gainNode.connect(context.destination)
+  gainNode.gain.setValueAtTime(volume, context.currentTime)
   noise.start()
 }
 
@@ -77,9 +80,12 @@ for (let i = 0; i < brownBufferSize; i++) {
 export function playBrown () {
   if (noise) return
   noise = context.createBufferSource()
+  const gainNode = context.createGain()
   noise.buffer = brownBuffer
   noise.loop = true
-  noise.connect(context.destination)
+  noise.connect(gainNode)
+  gainNode.connect(context.destination)
+  gainNode.gain.setValueAtTime(volume, context.currentTime)
   noise.start()
 }
 
