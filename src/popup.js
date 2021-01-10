@@ -44,7 +44,7 @@ const actions = {
 
   changeVolume (event) {
     state.volume = event.target.value
-    // Noise.volume(event.target.value)
+    Noise.setVolume(event.target.value)
   },
 
   playAudio () {
