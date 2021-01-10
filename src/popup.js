@@ -1,81 +1,69 @@
 import m from 'mithril'
-import { play as playNoise, stop as stopNoise } from './noise'
-import openSpotify from './spotify'
+import * as Noise from './lib/noise'
+import * as Spotify from './lib/spotify'
+import init from './views/init'
+import work from './views/work'
+import done from './views/done'
 
-let page = 'initial'
-let time = 0 // in seconds
-let playing = false
-let noiseColor = 'white'
-let beatsPitch = 200
-let beatsPattern = 'beta'
+const views = { init, work, done }
 
-function start () {
-  page = 'playing'
-  play()
+const state = {
+  view: 'init',
+  mode: 'none',
+  timer: 0, // in seconds
+  paused: true,
+  noiseColor: 'white',
+  beatsPitch: 200,
+  beatsPattern: 'beta'
 }
 
-function stop () {
-  page = 'initial'
-  playing = false
-  stopNoise()
-}
-
-function play () {
-  playing = true
-  playNoise()
-}
-
-function toggle () {
-  playing = !playing
-  if (playing) {
-    playNoise()
-  } else {
-    stopNoise()
-  }
-}
-
-const pages = {
-  initial () {
-    return m('main', [
-      m('h1', { class: 'title' }, 'LifeOS'),
-      m('h3', { class: 'message' }, 'How long would you like to work?'),
-      m('span', { class: 'circles-dark' }),
-      m('span', { class: 'circles-medium' }),
-      m('span', { class: 'circles-light' }),
-      m('input', { class: 'timer', id: 'inputHour' }),
-      m('input', { class: 'timer', id: 'inputMin' }),
-      m('input', { class: 'timer', id: 'inputSec' }),
-      m('button', { class: 'start button', onclick: () => start() }, 'Start >')
-    ])
+const actions = {
+  start () {
+    state.view = 'work'
+    actions.play()
   },
-  playing () {
-    return m('main', [
-      m('h1', { class: 'title' }, 'Working...'),
-      m('button', { onclick: () => toggle() },
-        playing ? 'Pause' : 'Play'),
-      m('button', { onclick: () => openSpotify() }, 'Log in with Spotify'),
-      m('button', { }, 'Play Binaural Beats'),
-      m('button', {
-        onclick: () => stop(),
-        disabled: playing ? 'disabled' : null
-      }, 'Stop')
-    ])
-  },
-  complete () {
-    return m('main', [
-      m('h1', 'Complete state'),
-      m('button', 'Snooze'),
-      m('button', { onclick: () => stop() }, 'Ok')
-    ])
-  }
-}
 
-const popup = {
-  view () {
-    if (pages[page]) {
-      return pages[page]()
+  play () {
+    state.paused = false
+    actions.playAudio()
+  },
+
+  stop () {
+    state.view = 'init'
+    state.paused = true
+    actions.stopAudio()
+  },
+
+  playAudio () {
+    state.paused = false
+    if (state.mode === 'noise') {
+      Noise.play()
     }
+  },
+
+  stopAudio () {
+    state.paused = true
+    if (state.mode === 'noise') {
+      Noise.stop()
+    }
+  },
+
+  toggleAudio () {
+    state.paused = !state.paused
+    if (state.paused) {
+      actions.stopAudio()
+    } else {
+      actions.playAudio()
+    }
+  },
+
+  openSpotify () {
+    Spotify.open()
   }
 }
 
-m.mount(document.body, popup)
+m.mount(document.body, {
+  view: () => views[state.view]
+    ? views[state.view](state, actions)
+    : 'not found'
+})

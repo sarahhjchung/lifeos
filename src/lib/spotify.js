@@ -1,12 +1,13 @@
 import m from 'mithril'
-import clientId from './client.json'
 
 const chrome = window.chrome // eslint prefix
 const endpoint = 'https://accounts.spotify.com/authorize'
+const clientId = '299a4acc53634bc286572df9b8e8d9e3'
 const scopes = [
   'user-read-currently-playing',
   'user-read-playback-state'
 ]
+let token = null
 
 function getURL (endpoint, clientId, scopes) {
   const redirectURL = chrome.identity.getRedirectURL('callback')
@@ -18,7 +19,7 @@ function getURL (endpoint, clientId, scopes) {
     '&show_dialog=true'
 }
 
-export default function openSpotify () {
+export function open () {
   const req = getURL(endpoint, clientId, scopes)
   window.chrome.identity.launchWebAuthFlow({
     url: req,
@@ -30,15 +31,14 @@ export default function openSpotify () {
     const start = res.lastIndexOf(startkey) + startkey.length
     const end = res.lastIndexOf(endkey)
     const token = res.slice(start, end)
-    alert(token)
+    window.alert(token)
     m.request({
-      method: 'GET',
-      url: 'https://api.spotify.com/v1/me/player',
-      headers: {
-        Authorization: 'Bearer ' + token
-      }
-    }).then(result => {
-      alert(JSON.stringify(result))
+      url: 'https://api.spotify.com/v1/me',
+      headers: { Authorization: 'Bearer ' + token }
+    }).then(res => {
+      window.alert(JSON.stringify(res))
+    }).catch(err => {
+      window.alert(JSON.stringify(err))
     })
   })
 }
