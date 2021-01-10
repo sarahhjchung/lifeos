@@ -5,5 +5,8 @@ export default (state, actions) =>
   m('main', [
     m('h1', { class: 'title' }, 'LifeOS'),
     m('h3', { class: 'message' }, 'How long would you like to work?'),
+    m('input', { class: 'input -hours' }),
+    m('input', { class: 'input -minutes' }),
+    m('input', { class: 'input -seconds' }),
     m('button', { class: 'start button', onclick: actions.start }, 'Start >')
   ])
