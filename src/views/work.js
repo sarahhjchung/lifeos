@@ -10,7 +10,7 @@ export default (state, actions) =>
     }, m('span', { class: 'material-icons-round' }, 'replay')),
     m('button', { onclick: actions.toggleAudio },
       state.paused
-        ? m('span', { class: 'material-icons-round' }, 'play')
+        ? m('span', { class: 'material-icons-round' }, 'play_arrow')
         : m('span', { class: 'material-icons-round' }, 'pause')),
     m('div', { class: 'volume' }, [
       m('span', { class: 'material-icons-round' }, 'volume_up'),
